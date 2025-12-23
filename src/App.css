@@ -1045,8 +1045,6 @@ img{ display:block; max-width:100%; }
   text-shadow: 0 20px 70px rgba(0,0,0,.55);
 }
 
-.ceoQuoteBlock{ }
-
 .ceoQuote{
   margin: 0;
   font-size: clamp(18px, 2.2vw, 28px);
@@ -1064,7 +1062,6 @@ img{ display:block; max-width:100%; }
   width: min(520px, 100%);
 }
 
-.ceoMeta{ }
 .ceoName{
   font-weight: 950;
   color: rgba(255,255,255,.92);
