@@ -1,90 +1,86 @@
-'use client'
+import * as React from "react";
+import { IconButton } from "@chakra-ui/react";
+import { LuMoon, LuSun } from "react-icons/lu";
 
-import { ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react'
-import { ThemeProvider, useTheme } from 'next-themes'
+const STORAGE_KEY = "marvincla-color-mode";
 
-import * as React from 'react'
-import { LuMoon, LuSun } from 'react-icons/lu'
+const ColorModeContext = React.createContext(null);
 
-export function ColorModeProvider(props) {
-  return (
-    <ThemeProvider attribute='class' disableTransitionOnChange {...props} />
-  )
+function getInitialMode() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === "dark" || saved === "light") return saved;
+  } catch (_) {}
+  // fallback: preferenza sistema
+  if (typeof window !== "undefined" && window.matchMedia) {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  return "dark";
+}
+
+export function ColorModeProvider({ children }) {
+  const [colorMode, setColorMode] = React.useState(getInitialMode);
+
+  React.useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove("dark", "light");
+    root.classList.add(colorMode);
+
+    try {
+      localStorage.setItem(STORAGE_KEY, colorMode);
+    } catch (_) {}
+  }, [colorMode]);
+
+  const toggleColorMode = React.useCallback(() => {
+    setColorMode((m) => (m === "dark" ? "light" : "dark"));
+  }, []);
+
+  const value = React.useMemo(
+    () => ({ colorMode, setColorMode, toggleColorMode }),
+    [colorMode, toggleColorMode]
+  );
+
+  return <ColorModeContext.Provider value={value}>{children}</ColorModeContext.Provider>;
 }
 
 export function useColorMode() {
-  const { resolvedTheme, setTheme, forcedTheme } = useTheme()
-  const colorMode = forcedTheme || resolvedTheme
-  const toggleColorMode = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+  const ctx = React.useContext(ColorModeContext);
+  if (!ctx) {
+    // fallback sicuro se qualcuno usa hook fuori provider
+    return {
+      colorMode: "dark",
+      setColorMode: () => {},
+      toggleColorMode: () => {},
+    };
   }
-  return {
-    colorMode: colorMode,
-    setColorMode: setTheme,
-    toggleColorMode,
-  }
+  return ctx;
 }
 
 export function useColorModeValue(light, dark) {
-  const { colorMode } = useColorMode()
-  return colorMode === 'dark' ? dark : light
+  const { colorMode } = useColorMode();
+  return colorMode === "dark" ? dark : light;
 }
 
 export function ColorModeIcon() {
-  const { colorMode } = useColorMode()
-  return colorMode === 'dark' ? <LuMoon /> : <LuSun />
+  const { colorMode } = useColorMode();
+  return colorMode === "dark" ? <LuMoon /> : <LuSun />;
 }
 
-export const ColorModeButton = React.forwardRef(
-  function ColorModeButton(props, ref) {
-    const { toggleColorMode } = useColorMode()
-    return (
-      <ClientOnly fallback={<Skeleton boxSize='9' />}>
-        <IconButton
-          onClick={toggleColorMode}
-          variant='ghost'
-          aria-label='Toggle color mode'
-          size='sm'
-          ref={ref}
-          {...props}
-          css={{
-            _icon: {
-              width: '5',
-              height: '5',
-            },
-          }}
-        >
-          <ColorModeIcon />
-        </IconButton>
-      </ClientOnly>
-    )
-  },
-)
-
-export const LightMode = React.forwardRef(function LightMode(props, ref) {
+export const ColorModeButton = React.forwardRef(function ColorModeButton(props, ref) {
+  const { toggleColorMode } = useColorMode();
   return (
-    <Span
-      color='fg'
-      display='contents'
-      className='chakra-theme light'
-      colorPalette='gray'
-      colorScheme='light'
+    <IconButton
+      onClick={toggleColorMode}
+      variant="ghost"
+      aria-label="Toggle color mode"
+      size="sm"
       ref={ref}
       {...props}
-    />
-  )
-})
+    >
+      <ColorModeIcon />
+    </IconButton>
+  );
+});
 
-export const DarkMode = React.forwardRef(function DarkMode(props, ref) {
-  return (
-    <Span
-      color='fg'
-      display='contents'
-      className='chakra-theme dark'
-      colorPalette='gray'
-      colorScheme='dark'
-      ref={ref}
-      {...props}
-    />
-  )
-})
+export const LightMode = ({ children }) => <>{children}</>;
+export const DarkMode = ({ children }) => <>{children}</>;
