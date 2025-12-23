@@ -3,6 +3,11 @@ import ColdChainRing from "./ColdChainRing";
 import Footer from "./Footer";
 import ceoImage from "../assets/ceo.png";
 import homeImg from "../assets/home2.png";
+import produzioneImg from "../assets/produzione2.png";
+import trasformazioneImg from "../assets/Trasformazione2.png";
+import brandImg from "../assets/brand.png";
+import venditaImg from "../assets/vendita2.png";
+import logo from "../assets/logoMtrasp.png";
 
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,9 +46,13 @@ export default function LandingPage() {
               }}
               aria-label="Marvincla - Home"
             >
-              <span className="brandMark" aria-hidden="true">
-                M
-              </span>
+              <div className="nav-logo">
+                <img
+                  src={logo}
+                  alt="Marvincla"
+                  className="nav-logo-img"
+                />
+              </div>
               <span>Marvincla</span>
             </a>
 
@@ -316,6 +325,41 @@ export default function LandingPage() {
     </div>
   </div>
 </section>
+
+{/* ================= MOCKUP VISUAL ================= */}
+<section id="mockup" className="section section--mockup">
+  <div className="container">
+    <div className="section-header">
+    </div>
+    <div className="mockup-puzzle">
+      {/* CENTRALE — TRASFORMAZIONE */}
+      <figure className="mockup-item mockup-main" data-reveal>
+        <img src={trasformazioneImg} alt="Panificio artigianale" />
+        <figcaption>Trasformazione</figcaption>
+      </figure>
+
+      {/* PRODUZIONE */}
+      <figure className="mockup-item mockup-prod" data-reveal data-delay="80">
+        <img src={produzioneImg} alt="Azienda agricola" />
+        <figcaption>Produzione</figcaption>
+      </figure>
+
+      {/* BRAND */}
+      <figure className="mockup-item mockup-brand" data-reveal data-delay="120">
+        <img src={brandImg} alt="Brand agroalimentare" />
+        <figcaption>Brand</figcaption>
+      </figure>
+
+      {/* VENDITA */}
+      <figure className="mockup-item mockup-sale" data-reveal data-delay="160">
+        <img src={venditaImg} alt="E-commerce agroalimentare" />
+        <figcaption>Vendita</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
 
         {/* ================= PERCHÉ ================= */}
         <section id="perche" className="section whySection">

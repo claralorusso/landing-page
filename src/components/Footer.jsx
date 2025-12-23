@@ -48,7 +48,6 @@ export default function Footer() {
             <Text fontWeight="900" letterSpacing="-0.4px">
               Marvincla
             </Text>
-
             <Text fontSize="sm" color={COLORS.muted} maxW="42ch">
               Dalla terra al digitale. Strategia, prodotto e filiera prima della tecnologia.
             </Text>
