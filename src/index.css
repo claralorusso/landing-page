@@ -1,25 +1,24 @@
-ì:root{
+:root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-*{ box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-html, body{
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-body{
-  /* IMPORTANTISSIMO: niente flex qui */
-  display: block;
+body {
+  display: block; /* IMPORTANTISSIMO: niente flex qui */
   min-width: 320px;
   min-height: 100%;
 }
 
-#root{
+#root {
   min-height: 100%;
 }

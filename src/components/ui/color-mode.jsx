@@ -4,17 +4,36 @@ import { LuMoon, LuSun } from "react-icons/lu";
 
 const STORAGE_KEY = "marvincla-color-mode";
 
+// ✅ Cookiebot: persistiamo solo dopo consenso "Preferenze".
+// Se Cookiebot non c'è (dev/local), consentiamo la persistenza.
+function hasPreferencesConsent() {
+  try {
+    if (typeof window === "undefined") return false;
+    if (!window.Cookiebot || !window.Cookiebot.consent) return true;
+    return !!window.Cookiebot.consent.preferences;
+  } catch {
+    return false;
+  }
+}
+
 const ColorModeContext = React.createContext(null);
 
 function getInitialMode() {
+  const canPersist = hasPreferencesConsent();
+
   try {
+    if (!canPersist) throw new Error("no-preferences-consent");
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === "dark" || saved === "light") return saved;
-  } catch (_) {}
-  // fallback: preferenza sistema
+  } catch {
+    // niente storage prima del consenso: OK
+  }
+
+  // fallback: preferenza di sistema
   if (typeof window !== "undefined" && window.matchMedia) {
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
+
   return "dark";
 }
 
@@ -26,9 +45,31 @@ export function ColorModeProvider({ children }) {
     root.classList.remove("dark", "light");
     root.classList.add(colorMode);
 
+    // ✅ salva SOLO se consentito
     try {
-      localStorage.setItem(STORAGE_KEY, colorMode);
-    } catch (_) {}
+      if (hasPreferencesConsent()) {
+        localStorage.setItem(STORAGE_KEY, colorMode);
+      }
+    } catch {}
+  }, [colorMode]);
+
+  // ✅ Se l'utente accetta preferenze dopo, salva la scelta corrente
+  React.useEffect(() => {
+    function persistNow() {
+      try {
+        if (hasPreferencesConsent()) {
+          localStorage.setItem(STORAGE_KEY, colorMode);
+        }
+      } catch {}
+    }
+
+    window.addEventListener?.("CookiebotOnAccept", persistNow);
+    window.addEventListener?.("CookiebotOnLoad", persistNow);
+
+    return () => {
+      window.removeEventListener?.("CookiebotOnAccept", persistNow);
+      window.removeEventListener?.("CookiebotOnLoad", persistNow);
+    };
   }, [colorMode]);
 
   const toggleColorMode = React.useCallback(() => {
@@ -46,12 +87,7 @@ export function ColorModeProvider({ children }) {
 export function useColorMode() {
   const ctx = React.useContext(ColorModeContext);
   if (!ctx) {
-    // fallback sicuro se qualcuno usa hook fuori provider
-    return {
-      colorMode: "dark",
-      setColorMode: () => {},
-      toggleColorMode: () => {},
-    };
+    return { colorMode: "dark", setColorMode: () => {}, toggleColorMode: () => {} };
   }
   return ctx;
 }
