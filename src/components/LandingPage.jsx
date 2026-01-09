@@ -1,122 +1,49 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
+import Navbar from "./Navbar"; // ✅ usa la Navbar Chakra unica
 import ColdChainRing from "./ColdChainRing";
 import Footer from "./Footer";
+
 import ceoImage from "../assets/ceo.png";
 import homeImg from "../assets/home2.png";
 import produzioneImg from "../assets/produzione2.png";
 import trasformazioneImg from "../assets/Trasformazione2.png";
 import brandImg from "../assets/brand.png";
 import venditaImg from "../assets/vendita2.png";
-import logo from "../assets/logoMtrasp.png";
 
 export default function LandingPage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const NAV = useMemo(
-    () => [
-      { id: "home", label: "Home" },
-      { id: "filiera", label: "Filiera" },
-      { id: "perche", label: "Perché" },
-      { id: "coldsharing", label: "ColdSharing" },
-      { id: "ceo", label: "CEO" },
-      { id: "contatti", label: "Contatti" },
-    ],
-    []
-  );
+  () => [
+    { type: "section", id: "home", label: "Home" },
+    { type: "section", id: "filiera", label: "Filiera" },
+    { type: "section", id: "perche", label: "Perché" },
+    { type: "section", id: "coldsharing", label: "ColdSharing" },
+    { type: "section", id: "ceo", label: "CEO" },
+    { type: "page", to: "/contatti", label: "Contatti" },
+  ],
+  []
+);
 
-  function go(id) {
+
+  function go(item) {
     setMenuOpen(false);
-    const el = document.getElementById(id);
+
+    // Vai a una pagina
+    if (item.type === "page") {
+      window.location.href = item.to;
+      return;
+    }
+
+    // Scroll su sezione landing
+    const el = document.getElementById(item.id);
     if (!el) return;
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+
   return (
     <div className="page">
-      {/* NAVBAR */}
-      <header className="navWrap">
-        <div className="container">
-          <div className="nav">
-            <a
-              href="#home"
-              className="brand"
-              onClick={(e) => {
-                e.preventDefault();
-                go("home");
-              }}
-              aria-label="Marvincla - Home"
-            >
-              <div className="nav-logo">
-                <img
-                  src={logo}
-                  alt="Marvincla"
-                  className="nav-logo-img"
-                />
-              </div>
-              <span>Marvincla</span>
-            </a>
-
-            <nav className="navLinks" aria-label="Navigazione">
-              {NAV.map((l) => (
-                <a
-                  key={l.id}
-                  className="navLink"
-                  href={`#${l.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    go(l.id);
-                  }}
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
-
-            <div className="navActions">
-              <a
-                className="btn btnPrimary"
-                href="#contatti"
-                onClick={(e) => {
-                  e.preventDefault();
-                  go("contatti");
-                }}
-              >
-                Parliamone
-              </a>
-
-              <button
-                className="burger"
-                type="button"
-                aria-label={menuOpen ? "Chiudi menu" : "Apri menu"}
-                aria-expanded={menuOpen}
-                onClick={() => setMenuOpen((v) => !v)}
-              >
-                <span />
-                <span />
-                <span />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className={`mobileMenu ${menuOpen ? "open" : ""}`}>
-          <div className="mobileMenuInner">
-            {NAV.map((l) => (
-              <a
-                key={l.id}
-                className="mobileLink"
-                href={`#${l.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  go(l.id);
-                }}
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </header>
+      {/* ✅ NAVBAR UNICA (hamburger sempre visibile: landing + pagine) */}
+      <Navbar />
 
       <main>
         {/* HOME (resta in frame, ok) */}
@@ -126,7 +53,7 @@ export default function LandingPage() {
               <div className="hero">
                 <div className="heroLeft">
                   <p className="p editorialBadge" style={{ marginBottom: 14 }}>
-                    Marvincla SRL • Dalla terra al digitale
+                    Marvincla SRL • Soluzioni digitali per aziende agroalimentari
                   </p>
 
                   <h1 className="h1">
@@ -136,8 +63,8 @@ export default function LandingPage() {
                   </h1>
 
                   <p className="lead">
-                    Sito, e-commerce, campagne e dati: ti aiutiamo a farti trovare, vendere meglio e lavorare con più efficienza.
-                    Con un metodo semplice, costruito per l’agroalimentare.
+                    Supportiamo le imprese della filiera agroalimentare nella digitalizzazione di siti web, e-commerce
+                    B2B, dati e processi.
                   </p>
 
                   <div className="heroCtas">
@@ -165,17 +92,12 @@ export default function LandingPage() {
                   </div>
 
                   <p className="p" style={{ marginTop: 14, color: "rgba(255,255,255,.62)" }}>
-                    Un unico interlocutore. Risultati misurabili. Filiera al centro.
+                    Un unico partner digitale. Risultati misurabili. Filiera agroalimentare al centro.
                   </p>
                 </div>
 
                 <div className="heroRight">
-                  <img
-                    className="heroImage"
-                    src={homeImg}
-                    alt="Il digitale che fa crescere il tuo prodotto"
-                    loading="eager"
-                  />
+                  <img className="heroImage" src={homeImg} alt="Il digitale che fa crescere il tuo prodotto" loading="eager" />
                 </div>
               </div>
             </div>
@@ -194,8 +116,8 @@ export default function LandingPage() {
                 </h2>
 
                 <p className="lead">
-                  Il tuo prodotto attraversa passaggi, persone e decisioni. Marvincla rende ogni anello più{" "}
-                  <b>visibile</b>, più <b>connesso</b> e più <b>efficiente</b>.
+                  Il tuo prodotto attraversa passaggi, persone e decisioni. Marvincla rende ogni anello più <b>visibile</b>, più{" "}
+                  <b>connesso</b> e più <b>efficiente</b>.
                 </p>
 
                 <p className="p subtle" style={{ marginTop: 14 }}>
@@ -238,128 +160,107 @@ export default function LandingPage() {
           </div>
         </section>
 
-{/* ================= I NOSTRI SERVIZI ================= */}
-<section id="servizi" className="section">
-  <div className="container">
+        {/* ================= I NOSTRI SERVIZI ================= */}
+        <section id="servizi" className="section">
+          <div className="container">
+            <div className="section-header">
+              <h2 className="section-title" data-reveal data-delay="0">
+                Come lavoriamo
+              </h2>
+            </div>
 
-    {/* HEADER SEZIONE (FUORI dalla grid) */}
-    <div className="section-header">
-      <h2 className="section-title" data-reveal data-delay="0">
-        Come lavoriamo
-      </h2>
-    </div>
+            <div className="services-grid slim">
+              <div className="service-box">
+                <span className="service-step">Fase 1</span>
+                <div className="service-icon">🌱</div>
 
-    {/* GRID SERVIZI */}
-    <div className="services-grid slim">
-      {/* STEP 1 */}
-      <div className="service-box">
-        <span className="service-step">Fase 1</span>
-        <div className="service-icon">🌱</div>
+                <h3>Raccontare</h3>
+                <p className="service-subtitle">Dare identità e valore al tuo prodotto</p>
 
-        <h3>Raccontare</h3>
-        <p className="service-subtitle">Dare identità e valore al tuo prodotto</p>
+                <p className="service-desc">
+                  Prima di vendere, un prodotto deve essere capito, trovato e riconosciuto. Costruiamo una presenza digitale chiara e
+                  autorevole per il settore agroalimentare.
+                </p>
 
-        <p className="service-desc">
-          Prima di vendere, un prodotto deve essere capito, trovato e riconosciuto.
-          Costruiamo una presenza digitale chiara e autorevole per il settore agroalimentare.
-        </p>
+                <ul className="service-list">
+                  <li>Siti istituzionali e di prodotto</li>
+                  <li>Landing page per fiere e campagne</li>
+                  <li>SEO tecnica e contenuti</li>
+                </ul>
 
-        <ul className="service-list">
-          <li>Siti istituzionali e di prodotto</li>
-          <li>Landing page per fiere e campagne</li>
-          <li>SEO tecnica e contenuti</li>
-        </ul>
+                <div className="service-ai">AI → testi, struttura e intenti di ricerca ottimizzati</div>
+              </div>
 
-        <div className="service-ai">
-          AI → testi, struttura e intenti di ricerca ottimizzati
-        </div>
-      </div>
+              <div className="service-box featured">
+                <span className="service-step">Fase 2</span>
+                <div className="service-icon">🛒</div>
 
-      {/* STEP 2 */}
-      <div className="service-box featured">
-        <span className="service-step">Fase 2</span>
-        <div className="service-icon">🛒</div>
+                <h3>Vendere</h3>
+                <p className="service-subtitle">Trasformare il valore in fatturato</p>
 
-        <h3>Vendere</h3>
-        <p className="service-subtitle">Trasformare il valore in fatturato</p>
+                <p className="service-desc">
+                  Quando il prodotto è chiaro, il digitale diventa operativo. Realizziamo soluzioni su misura per vendere e controllare il
+                  business.
+                </p>
 
-        <p className="service-desc">
-          Quando il prodotto è chiaro, il digitale diventa operativo.
-          Realizziamo soluzioni su misura per vendere e controllare il business.
-        </p>
+                <ul className="service-list">
+                  <li>E-commerce B2B e B2C</li>
+                  <li>Gestione ordini e clienti</li>
+                  <li>Dashboard vendite e performance</li>
+                </ul>
 
-        <ul className="service-list">
-          <li>E-commerce B2B e B2C</li>
-          <li>Gestione ordini e clienti</li>
-          <li>Dashboard vendite e performance</li>
-        </ul>
+                <div className="service-ai">AI → analisi vendite, stagionalità e suggerimenti operativi</div>
+              </div>
 
-        <div className="service-ai">
-          AI → analisi vendite, stagionalità e suggerimenti operativi
-        </div>
-      </div>
+              <div className="service-box">
+                <span className="service-step">Fase 3</span>
+                <div className="service-icon">📣</div>
 
-      {/* STEP 3 */}
-      <div className="service-box">
-        <span className="service-step">Fase 3</span>
-        <div className="service-icon">📣</div>
+                <h3>Crescere</h3>
+                <p className="service-subtitle">Portare il prodotto sui mercati giusti</p>
 
-        <h3>Crescere</h3>
-        <p className="service-subtitle">Portare il prodotto sui mercati giusti</p>
+                <p className="service-desc">
+                  Dopo aver strutturato la vendita, lavoriamo sulla crescita. Campagne mirate, dati leggibili e investimenti misurabili.
+                </p>
 
-        <p className="service-desc">
-          Dopo aver strutturato la vendita, lavoriamo sulla crescita.
-          Campagne mirate, dati leggibili e investimenti misurabili.
-        </p>
+                <ul className="service-list">
+                  <li>Google Ads e Social Ads</li>
+                  <li>Campagne locali e nazionali</li>
+                  <li>Monitoraggio e report chiari</li>
+                </ul>
 
-        <ul className="service-list">
-          <li>Google Ads e Social Ads</li>
-          <li>Campagne locali e nazionali</li>
-          <li>Monitoraggio e report chiari</li>
-        </ul>
+                <div className="service-ai">AI → ottimizzazione annunci, creatività e budget</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <div className="service-ai">
-          AI → ottimizzazione annunci, creatività e budget
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        {/* ================= MOCKUP VISUAL ================= */}
+        <section id="mockup" className="section section--mockup">
+          <div className="container">
+            <div className="mockup-puzzle">
+              <figure className="mockup-item mockup-main" data-reveal>
+                <img src={trasformazioneImg} alt="Panificio artigianale" />
+                <figcaption>Trasformazione</figcaption>
+              </figure>
 
-{/* ================= MOCKUP VISUAL ================= */}
-<section id="mockup" className="section section--mockup">
-  <div className="container">
-    <div className="section-header">
-    </div>
-    <div className="mockup-puzzle">
-      {/* CENTRALE — TRASFORMAZIONE */}
-      <figure className="mockup-item mockup-main" data-reveal>
-        <img src={trasformazioneImg} alt="Panificio artigianale" />
-        <figcaption>Trasformazione</figcaption>
-      </figure>
+              <figure className="mockup-item mockup-prod" data-reveal data-delay="80">
+                <img src={produzioneImg} alt="Azienda agricola" />
+                <figcaption>Produzione</figcaption>
+              </figure>
 
-      {/* PRODUZIONE */}
-      <figure className="mockup-item mockup-prod" data-reveal data-delay="80">
-        <img src={produzioneImg} alt="Azienda agricola" />
-        <figcaption>Produzione</figcaption>
-      </figure>
+              <figure className="mockup-item mockup-brand" data-reveal data-delay="120">
+                <img src={brandImg} alt="Brand agroalimentare" />
+                <figcaption>Brand</figcaption>
+              </figure>
 
-      {/* BRAND */}
-      <figure className="mockup-item mockup-brand" data-reveal data-delay="120">
-        <img src={brandImg} alt="Brand agroalimentare" />
-        <figcaption>Brand</figcaption>
-      </figure>
-
-      {/* VENDITA */}
-      <figure className="mockup-item mockup-sale" data-reveal data-delay="160">
-        <img src={venditaImg} alt="E-commerce agroalimentare" />
-        <figcaption>Vendita</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-
+              <figure className="mockup-item mockup-sale" data-reveal data-delay="160">
+                <img src={venditaImg} alt="E-commerce agroalimentare" />
+                <figcaption>Vendita</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
 
         {/* ================= PERCHÉ ================= */}
         <section id="perche" className="section whySection">
@@ -372,8 +273,7 @@ export default function LandingPage() {
               <div className="whyBlock whyLeftTop" data-reveal data-delay="80">
                 <h3 className="whyH3">Un unico interlocutore</h3>
                 <p className="whyP">
-                  Dalla strategia all’esecuzione: siti, e-commerce, campagne, dati e piattaforme.
-                  Un solo metodo, un’unica direzione.
+                  Dalla strategia all’esecuzione: siti, e-commerce, campagne, dati e piattaforme. Un solo metodo, un’unica direzione.
                 </p>
               </div>
 
@@ -382,17 +282,14 @@ export default function LandingPage() {
               <div className="whyBlock whyLeftBottom" data-reveal data-delay="160">
                 <h3 className="whyH3">Approccio strategico</h3>
                 <p className="whyP">
-                  Prima di costruire, capiamo dove andare: obiettivi, canali, priorità.
-                  Così ogni investimento ha una logica e un ritorno.
+                  Prima di costruire, capiamo dove andare: obiettivi, canali, priorità. Così ogni investimento ha una logica e un ritorno.
                 </p>
               </div>
 
               <div className="whyCenter" aria-hidden="true">
                 <svg className="whyCurveSvg" viewBox="0 0 300 700" preserveAspectRatio="none">
                   <path
-                    d="M150,20
-                       C80,140 80,260 150,340
-                       C220,420 220,540 150,660"
+                    d="M150,20 C80,140 80,260 150,340 C220,420 220,540 150,660"
                     fill="none"
                     stroke="rgba(255,255,255,.34)"
                     strokeWidth="2.5"
@@ -405,8 +302,8 @@ export default function LandingPage() {
                 <div className="whyBlock whyRight" data-reveal data-delay="240">
                   <h3 className="whyH3">Filiera prima della tecnologia</h3>
                   <p className="whyP">
-                    Non portiamo soluzioni standard. Partiamo dal prodotto, dai processi e dal mercato.
-                    Il digitale deve valorizzare la realtà, non complicarla.
+                    Non portiamo soluzioni standard. Partiamo dal prodotto, dai processi e dal mercato. Il digitale deve valorizzare la
+                    realtà, non complicarla.
                   </p>
                 </div>
               </div>
@@ -414,167 +311,161 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ================= IL NOSTRO PROGETTO — ColdSharing ================= */}
-        <section id="coldsharing" className="section projectSection">
-          <div className="container">
-            <div className="projectSplit">
-              <div className="projectLeft">
-                <p className="projectKicker">Case study • Prodotto Marvincla</p>
+       {/* ================= IL NOSTRO PROGETTO — ColdSharing ================= */}
+<section id="coldsharing" className="section projectSection">
+  <div className="container">
+    <div className="projectSplit">
+      <div className="projectLeft">
+        <p className="projectKicker">Case study • Prodotto Marvincla</p>
 
-                <h2 className="projectTitle">
-                  Il nostro progetto
-                  <span className="projectTitleAccent"> ColdSharing</span>
-                </h2>
+        <h2 className="projectTitle">
+          Il nostro progetto<span className="projectTitleAccent"> ColdSharing</span>
+        </h2>
 
-                <p className="projectLead">
-                  La piattaforma B2B che rende semplice trovare e valorizzare <b>locali refrigerati</b> nella filiera
-                  agroalimentare.
-                </p>
+        <p className="projectLead">
+          Cold Sharing è una piattaforma digitale dedicata alla <b>filiera agroalimentare</b>, pensata per ottimizzare la gestione
+          del freddo e la <b>condivisione delle risorse logistiche</b>.
+        </p>
 
-                <div className="projectCards">
-                  <div className="projectCard">
-                    <div className="projectCardTop">
-                      <span className="projectCardDot" />
-                      <span className="projectCardTag">Ricerca</span>
-                    </div>
-                    <h3>Trova spazi in pochi minuti</h3>
-                    <p>Filtri rapidi, risultati puliti, contatto immediato con l’operatore.</p>
-                  </div>
+        <div className="projectCards">
+          <div className="projectCard">
+            <div className="projectCardTop">
+              <span className="projectCardDot" />
+              <span className="projectCardTag">Ricerca</span>
+            </div>
+            <h3>Trova spazi in pochi minuti</h3>
+            <p>Filtri rapidi, risultati puliti, contatto immediato con l’operatore.</p>
+          </div>
 
-                  <div className="projectCard">
-                    <div className="projectCardTop">
-                      <span className="projectCardDot" />
-                      <span className="projectCardTag">Valore</span>
-                    </div>
-                    <h3>Riduci sprechi e inefficienze</h3>
-                    <p>Valorizza capacità inutilizzata e ottimizza costi logistici.</p>
-                  </div>
+          <div className="projectCard">
+            <div className="projectCardTop">
+              <span className="projectCardDot" />
+              <span className="projectCardTag">Valore</span>
+            </div>
+            <h3>Riduci sprechi e inefficienze</h3>
+            <p>Valorizza capacità inutilizzata e ottimizza costi logistici.</p>
+          </div>
 
-                  <div className="projectCard">
-                    <div className="projectCardTop">
-                      <span className="projectCardDot" />
-                      <span className="projectCardTag">Connessioni</span>
-                    </div>
-                    <h3>Domanda ↔ Offerta senza attriti</h3>
-                    <p>Una piattaforma unica che accelera le relazioni di filiera.</p>
+          <div className="projectCard">
+            <div className="projectCardTop">
+              <span className="projectCardDot" />
+              <span className="projectCardTag">Connessioni</span>
+            </div>
+            <h3>Domanda ↔ Offerta senza attriti</h3>
+            <p>Una piattaforma unica che accelera le relazioni di filiera.</p>
+          </div>
+        </div>
+
+        <div className="projectCtas">
+          <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+            Apri ColdSharing
+          </a>
+
+          <a className="btn btnGhost" href="/coldsharing/perche-e-nata">
+            Perché è nata
+          </a>
+        </div>
+
+        <p className="projectNote">*ColdSharing è un marchio di Marvincla SRL*</p>
+      </div>
+
+      {/* ✅ MOCKUP PHONE RIPRISTINATO */}
+      <div className="projectRight">
+        <div className="handWrap" aria-label="Mockup smartphone ColdSharing">
+          <div className="handPalm" aria-hidden="true" />
+          <div className="handThumb" aria-hidden="true" />
+
+          <div className="phone">
+            <div className="phoneNotch" aria-hidden="true" />
+            <div className="phoneScreen">
+              <div className="csUiTop">
+                <div className="csUiBrand">
+                  <span className="csUiLogo">❄️</span>
+                  <div>
+                    <div className="csUiName">ColdSharing</div>
+                    <div className="csUiSub">Locali refrigerati • Ricerca rapida</div>
                   </div>
                 </div>
-
-                <div className="projectCtas">
-                  <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
-                    Apri ColdSharing
-                  </a>
-
-                  <a
-                    className="btn btnGhost"
-                    href="#contatti"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      go("contatti");
-                    }}
-                  >
-                    Portami un progetto simile
-                  </a>
-                </div>
-
-                <p className="projectNote">*ColdSharing è un marchio di Marvincla SRL*</p>
+                <div className="csUiChip">B2B</div>
               </div>
 
-              <div className="projectRight">
-                <div className="handWrap" aria-label="Mockup smartphone ColdSharing">
-                  <div className="handPalm" aria-hidden="true" />
-                  <div className="handThumb" aria-hidden="true" />
+              <div className="csUiSearch">
+                <div className="csUiSearchIcon">🔎</div>
+                <div className="csUiSearchText">Cerca per città, m³, temperatura…</div>
+              </div>
 
-                  <div className="phone">
-                    <div className="phoneNotch" aria-hidden="true" />
-                    <div className="phoneScreen">
-                      <div className="csUiTop">
-                        <div className="csUiBrand">
-                          <span className="csUiLogo">❄️</span>
-                          <div>
-                            <div className="csUiName">ColdSharing</div>
-                            <div className="csUiSub">Locali refrigerati • Ricerca rapida</div>
-                          </div>
-                        </div>
-                        <div className="csUiChip">B2B</div>
-                      </div>
+              <div className="csUiFilters">
+                <span className="csUiPill">📍 Zona</span>
+                <span className="csUiPill">🌡️ Temp</span>
+                <span className="csUiPill">📦 Capienza</span>
+                <span className="csUiPill">✅ Dispon.</span>
+              </div>
 
-                      <div className="csUiSearch">
-                        <div className="csUiSearchIcon">🔎</div>
-                        <div className="csUiSearchText">Cerca per città, m³, temperatura…</div>
-                      </div>
+              <div className="csUiList">
+                <div className="csUiCard">
+                  <div className="csUiThumb" />
+                  <div className="csUiMeta">
+                    <div className="csUiRow">
+                      <b>Bari • 0–4°C</b>
+                      <span className="csUiPrice">50 €/gg</span>
+                    </div>
+                    <div className="csUiSmall">Cella frigo di 320 m³ • Capacità 120 pallets</div>
+                    <div className="csUiTags">
+                      <span>Uva</span>
+                      <span>Cella di conservazione</span>
+                      <span>Conferma immediata</span>
+                    </div>
+                  </div>
+                </div>
 
-                      <div className="csUiFilters">
-                        <span className="csUiPill">📍 Zona</span>
-                        <span className="csUiPill">🌡️ Temp</span>
-                        <span className="csUiPill">📦 Capienza</span>
-                        <span className="csUiPill">✅ Dispon.</span>
-                      </div>
+                <div className="csUiCard">
+                  <div className="csUiThumb alt" />
+                  <div className="csUiMeta">
+                    <div className="csUiRow">
+                      <b>Roma • -18°C</b>
+                      <span className="csUiPrice">70 €/gg</span>
+                    </div>
+                    <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 500 bins</div>
+                    <div className="csUiTags">
+                      <span>Surgelati</span>
+                      <span>Cancellazione gratuita</span>
+                      <span>Conferma immediata</span>
+                    </div>
+                  </div>
+                </div>
 
-                      <div className="csUiList">
-                        <div className="csUiCard">
-                          <div className="csUiThumb" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Bari • 0–4°C</b>
-                              <span className="csUiPrice">50 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">Cella frigo di 320 m³ • Capacità 120 pallets</div>
-                            <div className="csUiTags">
-                              <span>Uva</span>
-                              <span>Cella di conservazione </span>
-                              <span>Conferma immediata</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="csUiCard">
-                          <div className="csUiThumb alt" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Roma • -18°C</b>
-                              <span className="csUiPrice">70 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 500 bins</div>
-                            <div className="csUiTags">
-                              <span>Surgelati</span>
-                              <span>Cancellazione gratuita</span>
-                              <span>Conferma immediata</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="csUiCard">
-                          <div className="csUiThumb" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Siracusa • 3–7°C</b>
-                              <span className="csUiPrice">100 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 250 pallets</div>
-                            <div className="csUiTags">
-                              <span>Arance</span>
-                              <span>Cancellazione gratuita</span>
-                              <span>Richiesta di prenotazione</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="csUiBottom">
-                        <div className="csUiNavItem active">Home</div>
-                        <div className="csUiNavItem">Cerca</div>
-                        <div className="csUiNavItem">Preferiti</div>
-                        <div className="csUiNavItem">Profilo</div>
-                      </div>
+                <div className="csUiCard">
+                  <div className="csUiThumb" />
+                  <div className="csUiMeta">
+                    <div className="csUiRow">
+                      <b>Siracusa • 3–7°C</b>
+                      <span className="csUiPrice">100 €/gg</span>
+                    </div>
+                    <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 250 pallets</div>
+                    <div className="csUiTags">
+                      <span>Arance</span>
+                      <span>Cancellazione gratuita</span>
+                      <span>Richiesta di prenotazione</span>
                     </div>
                   </div>
                 </div>
               </div>
 
+              <div className="csUiBottom">
+                <div className="csUiNavItem active">Home</div>
+                <div className="csUiNavItem">Cerca</div>
+                <div className="csUiNavItem">Preferiti</div>
+                <div className="csUiNavItem">Profilo</div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+      {/* ✅ FINE MOCKUP */}
+    </div>
+  </div>
+</section>
+
 
         {/* ================= CEO ================= */}
         <section id="ceo" className="section ceoSectionV2">
@@ -603,9 +494,10 @@ export default function LandingPage() {
                 </h2>
 
                 <p className="ceoQuoteV2">
-                  Nel digitale non vince chi fa più rumore, ma chi porta il prodotto giusto davanti alle persone giuste,
-                  nel momento giusto. Marvincla nasce per questo: rendere l’agroalimentare più visibile, più connesso
-                  e più forte.
+                  Nel digitale non vince chi fa più rumore, ma chi porta il prodotto giusto <b>davanti alle persone giuste</b>, nel momento
+                  giusto, lungo la <b>filiera agroalimentare</b>. Marvincla nasce per questo: aiutare le <b>aziende agroalimentari</b> a
+                  essere più visibili, più <b>connesse</b> e più <b>solide</b>, attraverso piattaforme digitali B2B, dati e processi che
+                  funzionano davvero.
                 </p>
 
                 <div className="ceoDividerV2" />
@@ -626,8 +518,6 @@ export default function LandingPage() {
                     Scrivi via email
                   </a>
                 </div>
-
-                <p className="ceoNoteV2">Rispondiamo con un primo feedback operativo: cosa fare, in che ordine, con quali priorità.</p>
               </div>
             </div>
           </div>
@@ -640,8 +530,7 @@ export default function LandingPage() {
               <div className="contactLeftV2">
                 <h2 className="contactTitleV2">Parliamo del tuo progetto</h2>
                 <p className="contactLeadV2">
-                  Raccontaci cosa produci e dove vuoi arrivare. Ti rispondiamo con una proposta concreta:
-                  <b> cosa fare, in che ordine e con quali priorità</b>.
+                  Scopri come <b>Marvincla</b> può supportare la tua azienda nella <b>digitalizzazione della filiera</b>.
                 </p>
 
                 <div className="contactQuickV2">
@@ -653,7 +542,7 @@ export default function LandingPage() {
                     </div>
                   </a>
 
-                  <a className="contactQuickCardV2" href="tel:+39XXXXXXXXXX">
+                  <a className="contactQuickCardV2" href="tel:+393331800400">
                     <div className="contactQuickIconV2">📞</div>
                     <div className="contactQuickTextV2">
                       <div className="contactQuickTitleV2">Telefono</div>
@@ -663,7 +552,7 @@ export default function LandingPage() {
 
                   <a
                     className="contactQuickCardV2"
-                    href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Marvincla%2C%20vorrei%20informazioni%20su%20servizi%20digitali%20per%20il%20settore%20agroalimentare."
+                    href="https://wa.me/393331800400?text=Ciao%20Marvincla%2C%20vorrei%20informazioni%20su%20servizi%20digitali%20per%20il%20settore%20agroalimentare."
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -759,20 +648,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* FOOTER */}
         <Footer />
       </main>
     </div>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  borderRadius: 14,
-  border: "1px solid rgba(255,255,255,.12)",
-  background: "rgba(255,255,255,.06)",
-  color: "rgba(255,255,255,.92)",
-  outline: "none",
-  fontSize: 14,
-};

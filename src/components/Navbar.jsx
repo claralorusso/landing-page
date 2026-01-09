@@ -6,7 +6,6 @@ import {
   HStack,
   Flex,
   Text,
-  Button,
   IconButton,
   Link as ChakraLink,
   useDisclosure,
@@ -18,28 +17,44 @@ import {
   VStack,
   Spacer,
   Image,
+  Button,
+  Divider,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const COLORS = {
   bgDark: "#0F1114",
   border: "rgba(230,234,238,0.14)",
   text: "#FFFFFF",
+  muted: "rgba(255,255,255,0.72)",
 };
 
-const NAV = [
+const LANDING_NAV = [
   { id: "home", label: "Home" },
-  { id: "chi-siamo", label: "Chi siamo" },
-  { id: "visione", label: "Visione" },
-  { id: "cosa-facciamo", label: "Cosa facciamo" },
+  { id: "filiera", label: "Filiera" },
+  { id: "servizi", label: "Servizi" },
   { id: "perche", label: "Perché" },
   { id: "coldsharing", label: "ColdSharing" },
-  { id: "contatti", label: "Contatti" },
+  { id: "ceo", label: "CEO" },
+];
+const PAGES_NAV = [
+  { to: "/digitalizzazione-agroalimentare", label: "Soluzioni digitali per aziende agroalimentari" },
+  { to: "/coldsharing/perche-e-nata", label: "Perché è nata ColdSharing" },
+  { to: "/blog", label: "Blog" },
+  { to: "/contatti", label: "Contatti" },
+];
+
+const NAV = [
+  ...LANDING_NAV.map((x) => ({ type: x.to ? "page" : "section", ...x })),
+  ...PAGES_NAV.map((x) => ({ type: "page", ...x })),
 ];
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrolled, setScrolled] = React.useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -47,37 +62,51 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function go(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (!el) return false;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  return true;
+}
 
-    // chiude drawer se aperto
-    onClose();
+function goSection(id) {
+  onClose();
 
-    // scroll con offset gestito da CSS (scroll-margin-top) o dal tuo layout
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  // siamo già in landing
+  if (location.pathname === "/") {
+    scrollToId(id);
+    return;
   }
 
-  const LinkItem = ({ id, children }) => (
-    <ChakraLink
-      href={`#${id}`}
-      px={3}
-      py={2}
-      borderRadius="10px"
-      _hover={{ bg: "rgba(255,255,255,0.06)", textDecoration: "none" }}
-      onClick={(e) => {
-        e.preventDefault();
-        go(id);
-      }}
-      fontSize="14px"
-      color={COLORS.text}
-      opacity={0.82}
-      _active={{ opacity: 1 }}
-      whiteSpace="nowrap"
-    >
-      {children}
-    </ChakraLink>
-  );
+  // vai alla landing con hash
+  navigate(`/#${id}`);
+
+  // aspetta che la landing monti e poi scrolla
+  let tries = 0;
+  const timer = setInterval(() => {
+    tries += 1;
+    const ok = scrollToId(id);
+    if (ok || tries > 30) clearInterval(timer);
+  }, 50);
+}
+
+function goPage(to) {
+  onClose();
+  navigate(to);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
+
+  function goPage(to) {
+    onClose();
+    navigate(to);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
+
+  function goItem(item) {
+    if (item.type === "page") return goPage(item.to);
+    return goSection(item.id);
+  }
 
   return (
     <Box
@@ -92,20 +121,25 @@ export default function Navbar() {
       boxShadow={scrolled ? "0 8px 24px rgba(0,0,0,0.25)" : "none"}
       backdropFilter="blur(12px)"
     >
-      {/* DESKTOP */}
       <Container maxW="7xl" py={3}>
         <Flex align="center" gap={4}>
           {/* Brand */}
           <ChakraLink
-            href="#home"
+            href="/"
             onClick={(e) => {
               e.preventDefault();
-              go("home");
+              // Sempre home top
+              if (location.pathname === "/") {
+                const el = document.getElementById("home");
+                el?.scrollIntoView({ behavior: "smooth", block: "start" });
+              } else {
+                window.location.href = "/#home";
+              }
+              onClose();
             }}
             _hover={{ textDecoration: "none" }}
           >
             <HStack spacing={3}>
-              {/* Logo container */}
               <Box
                 w="40px"
                 h="40px"
@@ -136,45 +170,22 @@ export default function Navbar() {
 
           <Spacer />
 
-          {/* Link desktop */}
-          <HStack spacing={1} display={{ base: "none", md: "flex" }} align="center">
-            {NAV.slice(0, 6).map((l) => (
-              <LinkItem key={l.id} id={l.id}>
-                {l.label}
-              </LinkItem>
-            ))}
-          </HStack>
-
-          {/* CTA + burger */}
-          <HStack spacing={3}>
-            <Button
-              display={{ base: "none", md: "inline-flex" }}
-              bg="#B7FF2A"
-              color="#061006"
-              _hover={{ filter: "brightness(1.05)" }}
-              borderRadius="999px"
-              fontWeight="900"
-              onClick={() => go("contatti")}
-            >
-              Parliamone
-            </Button>
-
-            <IconButton
-              aria-label="Apri menu"
-              icon={<HamburgerIcon />}
-              display={{ base: "inline-flex", md: "none" }}
-              onClick={onOpen}
-              borderRadius="999px"
-              bg="rgba(255,255,255,0.08)"
-              border="1px solid rgba(255,255,255,0.12)"
-              _hover={{ bg: "rgba(255,255,255,0.12)" }}
-            />
-          </HStack>
+          {/* ✅ Hamburger sempre visibile */}
+          <IconButton
+            aria-label="Apri menu"
+            onClick={onOpen}
+            icon={<HamburgerIcon boxSize={6} color="rgba(255,255,255,0.92)" />}
+            borderRadius="999px"
+            bg="rgba(255,255,255,0.08)"
+            border="1px solid rgba(255,255,255,0.12)"
+            _hover={{ bg: "rgba(255,255,255,0.12)" }}
+            _active={{ bg: "rgba(255,255,255,0.14)" }}
+          />
         </Flex>
       </Container>
 
-      {/* DRAWER MOBILE */}
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      {/* DRAWER MENU */}
+      <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent bg={COLORS.bgDark} color={COLORS.text}>
           <DrawerHeader borderBottomWidth="1px" borderColor={COLORS.border}>
@@ -200,39 +211,67 @@ export default function Navbar() {
                   draggable={false}
                 />
               </Box>
-              <Text fontWeight="900">Marvincla</Text>
+              <Text fontWeight="900">Menu</Text>
             </HStack>
           </DrawerHeader>
 
           <DrawerBody py={6}>
-            <VStack align="stretch" spacing={2}>
-              {NAV.map((l) => (
-                <Button
-                  key={l.id}
-                  variant="ghost"
-                  justifyContent="flex-start"
-                  borderRadius="14px"
-                  color={COLORS.text}
-                  _hover={{ bg: "rgba(255,255,255,0.06)" }}
-                  onClick={() => go(l.id)}
-                >
-                  {l.label}
-                </Button>
-              ))}
+            <VStack align="stretch" spacing={3}>
+              {/* Sezione: Landing */}
+          <VStack align="stretch" spacing={2}>
+            {LANDING_NAV.map((l) => (
+              <Button
+                key={l.id}
+                variant="ghost"
+                justifyContent="flex-start"
+                borderRadius="14px"
+                color={COLORS.text}
+                _hover={{ bg: "rgba(255,255,255,0.06)" }}
+                onClick={() => goSection(l.id)}
+              >
+                {l.label}
+              </Button>
+            ))}
+          </VStack>
 
-              <Box pt={3}>
-                <Button
-                  w="100%"
-                  bg="#B7FF2A"
-                  color="#061006"
-                  borderRadius="999px"
-                  fontWeight="900"
-                  _hover={{ filter: "brightness(1.05)" }}
-                  onClick={() => go("contatti")}
-                >
-                  Parliamone
-                </Button>
-              </Box>
+              {/* Sezione: Pagine */}
+              <Text fontSize="sm" color={COLORS.muted} fontWeight="800" letterSpacing="0.4px">
+                PAGINE
+              </Text>
+
+              <VStack align="stretch" spacing={2}>
+                {PAGES_NAV.map((p) => (
+                  <Button
+                    key={p.to}
+                    variant="ghost"
+                    justifyContent="flex-start"
+                    borderRadius="14px"
+                    color={COLORS.text}
+                    _hover={{ bg: "rgba(255,255,255,0.06)" }}
+                    onClick={() => goPage(p.to)}
+                  >
+                    {p.label}
+                  </Button>
+                ))}
+              </VStack>
+
+              {/* CTA in fondo */}
+              <Button
+                w="100%"
+                bg="#B7FF2A"
+                color="#061006"
+                borderRadius="999px"
+                fontWeight="900"
+                _hover={{ filter: "brightness(1.05)" }}
+                onClick={() => goPage("/contatti")}
+              >
+                Parliamone
+              </Button>
+
+
+              <Text color="rgba(255,255,255,0.55)" fontSize="xs" pt={2}>
+                Suggerimento: usa “Pagine” per approfondimenti, “Sezioni” per tornare alla landing.
+              </Text>
             </VStack>
           </DrawerBody>
         </DrawerContent>

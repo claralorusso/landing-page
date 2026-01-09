@@ -8,7 +8,7 @@ import {
   Link as ChakraLink,
   VStack,
 } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
 const COLORS = {
   bg: "#0F1114",
@@ -17,17 +17,55 @@ const COLORS = {
   muted: "rgba(255,255,255,0.58)",
 };
 
-const NAV = [
-  { label: "Home", href: "/#home" },
-  { label: "Filiera", href: "/#filiera" },
-  { label: "Servizi", href: "/#servizi" },
-  { label: "Perché", href: "/#perche" },
-  { label: "ColdSharing", href: "/#coldsharing" },
-  { label: "Contatti", href: "/#contatti" },
+// ✅ Sezioni della LANDING (non includere Contatti se ora è pagina)
+const LANDING_NAV = [
+  { label: "Home", id: "home" },
+  { label: "Filiera", id: "filiera" },
+  { label: "Servizi", id: "servizi" },
+  { label: "Perché", id: "perche" },
+  { label: "ColdSharing", id: "coldsharing" },
 ];
+
+// ✅ Link a PAGINA Contatti
+const CONTACTS_PAGE = { label: "Contatti", to: "/contatti" };
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return false;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
+  }
+
+  // ✅ (Punto 3) Scroll landing affidabile anche se parti da altre pagine
+  function goSection(id) {
+    // se siamo già in landing -> scroll diretto
+    if (location.pathname === "/") {
+      scrollToId(id);
+      return;
+    }
+
+    // vai alla landing con hash
+    navigate(`/#${id}`);
+
+    // aspetta che la landing monti e poi scrolla
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+      const ok = scrollToId(id);
+      if (ok || tries > 30) clearInterval(timer);
+    }, 50);
+  }
+
+  // ✅ (Punto 2) Contatti deve puntare alla pagina /contatti
+  function goContactsPage() {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    navigate("/contatti");
+  }
 
   return (
     <Box
@@ -46,10 +84,11 @@ export default function Footer() {
         >
           <VStack align="flex-start" spacing={3}>
             <Text fontWeight="900" letterSpacing="-0.4px">
-              Marvincla
+              Marvincla Srl – Soluzioni digitali per aziende agroalimentari.
             </Text>
             <Text fontSize="sm" color={COLORS.muted} maxW="42ch">
-              Dalla terra al digitale. Strategia, prodotto e filiera prima della tecnologia.
+              Digitalizzazione, siti web ed e-commerce B2B per aziende agroalimentari.
+              Soluzioni digitali per la filiera food.
             </Text>
 
             <Box>
@@ -58,27 +97,52 @@ export default function Footer() {
               </Text>
 
               <Text fontSize="sm" color={COLORS.muted}>
-                Bari
+                Bari, Italia
               </Text>
 
               <Text fontSize="sm" color={COLORS.muted}>
-                Roma
+                Roma, Italia
               </Text>
             </Box>
           </VStack>
 
+          {/* ✅ Link: sezioni landing + Contatti pagina */}
           <HStack spacing={5} flexWrap="wrap">
-            {NAV.map((item) => (
+            {LANDING_NAV.map((item) => (
               <ChakraLink
-                key={item.href}
-                href={item.href}
+                key={item.id}
+                as="button"
+                onClick={() => goSection(item.id)}
                 fontSize="sm"
                 color={COLORS.text}
                 _hover={{ color: "white" }}
+                style={{
+                  background: "none",
+                  border: 0,
+                  padding: 0,
+                  cursor: "pointer",
+                }}
               >
                 {item.label}
               </ChakraLink>
             ))}
+
+            {/* ✅ Contatti -> PAGINA */}
+            <ChakraLink
+              as="button"
+              onClick={goContactsPage}
+              fontSize="sm"
+              color={COLORS.text}
+              _hover={{ color: "white" }}
+              style={{
+                background: "none",
+                border: 0,
+                padding: 0,
+                cursor: "pointer",
+              }}
+            >
+              {CONTACTS_PAGE.label}
+            </ChakraLink>
           </HStack>
         </Flex>
 
@@ -93,13 +157,15 @@ export default function Footer() {
           gap={3}
         >
           <Text fontSize="sm" color={COLORS.muted}>
-            © {year} Marvincla SRL — Tutti i diritti riservati | P.IVA 08760160724 – REA BA 648160 – C.S. €10.000 i.v.
+            © {year} Marvincla SRL — Tutti i diritti riservati | P.IVA 08760160724 – REA BA
+            648160 – C.S. €10.000 i.v.
           </Text>
 
           <HStack spacing={4} flexWrap="wrap">
             <ChakraLink
               as={RouterLink}
               to="/privacy"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -110,11 +176,57 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/cookies"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
             >
               Cookie
+            </ChakraLink>
+
+            <ChakraLink
+              as={RouterLink}
+              to="/blog"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              fontSize="sm"
+              color={COLORS.muted}
+              _hover={{ color: "white" }}
+            >
+              Blog
+            </ChakraLink>
+
+            <ChakraLink
+              as={RouterLink}
+              to="/coldsharing/perche-e-nata"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              fontSize="sm"
+              color={COLORS.muted}
+              _hover={{ color: "white" }}
+            >
+              Perché è nata ColdSharing
+            </ChakraLink>
+
+            <ChakraLink
+              as={RouterLink}
+              to="/digitalizzazione-agroalimentare"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              fontSize="sm"
+              color={COLORS.muted}
+              _hover={{ color: "white" }}
+            >
+              Soluzioni digitali per aziende agroalimentari
+            </ChakraLink>
+
+            {/* ✅ opzionale: link Contatti anche qui sotto */}
+            <ChakraLink
+              as={RouterLink}
+              to="/contatti"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              fontSize="sm"
+              color={COLORS.muted}
+              _hover={{ color: "white" }}
+            >
+              Contatti
             </ChakraLink>
           </HStack>
         </Flex>
