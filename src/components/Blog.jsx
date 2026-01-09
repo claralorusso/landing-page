@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import homeImg from "../assets/blog.png";
 import logoM from "../assets/logoM2.png";
 import coldsharinglogo from "../assets/coldsharinglogo.png";
+import refromCover from "../assets/refrom.png"; // (creala o usa un placeholder)
+
 
 // ✅ Data con URL esplicita: ogni card porta alla pagina corretta (NON a /blog/:slug)
 const POSTS = [
@@ -24,7 +26,16 @@ const POSTS = [
         "Dall’esperienza diretta nella refrigerazione industriale alla creazione di una piattaforma B2B per rendere accessibile la capacità frigorifera.",
     meta: "5 min • Piattaforma digitale B2B",
     image: coldsharinglogo,
-    },
+  },
+    {
+  url: "/blog/come-si-realizzano-le-celle-frigorifere",
+  title: "Come si realizzano le celle frigorifere: guida pratica (progettazione, pannelli, impianto, collaudo)",
+  excerpt:
+    "Dalla progettazione all’isolamento, dall’impianto frigorifero al collaudo: fasi, scelte tecniche e errori da evitare. Con CTA per richiedere un preventivo a Refrom Italia.",
+  meta: "8 min • Refrigerazione industriale",
+  image: refromCover,
+  },
+
 ];
 
 
@@ -110,13 +121,13 @@ export default function Blog() {
             <div className="container">
               <div style={{ ...styles.lightFrame, textAlign: "center" }}>
                 <h2 style={{ ...styles.h2, margin: "0 auto" }}>
-                  Hai una idea e non sai come
+                  Vuoi che parliamo di te, di un progetto o di un argomento che merita di
                   <br />
-                  <span style={styles.accent}>svilupparla?</span>
+                  <span style={styles.accent}>essere approfondito?</span>
                 </h2>
 
                 <p style={{ ...styles.lead, margin: "10px auto 0", maxWidth: 820 }}>
-                  Marvincla ti aiuta in ogni fase progettuale. Ti mandiamo un primo feedback operativo: priorità, canali e cosa conviene costruire adesso.
+                  Scrivici e valutiamo se raccontarlo nel nostro blog.
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>

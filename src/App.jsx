@@ -10,6 +10,8 @@ import ColdsharingPercheNata from "./components/ColdsharingPercheNata";
 import BlogPost from "./components/BlogPost";
 import BlogMarvinclaOrigine from "./components/BlogMarvinclaOrigine";
 import Contatti from "./components/Contatti";
+import BlogCelleFrigorifere from "./components/BlogCelleFrigorifere";
+
 
 export default function App() {
   return (
@@ -33,6 +35,9 @@ export default function App() {
 
       {/* ✅ fcontatti */}
       <Route path="/contatti" element={<Contatti />} />
+
+      <Route path="/blog/come-si-realizzano-le-celle-frigorifere" element={<BlogCelleFrigorifere />} />
+
     </Routes>
   );
 }
