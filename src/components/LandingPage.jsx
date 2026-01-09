@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import Navbar from "./Navbar"; // ✅ usa la Navbar Chakra unica
 import ColdChainRing from "./ColdChainRing";
 import Footer from "./Footer";
@@ -11,42 +13,48 @@ import brandImg from "../assets/brand.png";
 import venditaImg from "../assets/vendita2.png";
 
 export default function LandingPage() {
+  const location = useLocation();
+
+  // (Opzionale) se un giorno vuoi passare NAV alla Navbar via props
   const NAV = useMemo(
-  () => [
-    { type: "section", id: "home", label: "Home" },
-    { type: "section", id: "filiera", label: "Filiera" },
-    { type: "section", id: "perche", label: "Perché" },
-    { type: "section", id: "coldsharing", label: "ColdSharing" },
-    { type: "section", id: "ceo", label: "CEO" },
-    { type: "page", to: "/contatti", label: "Contatti" },
-  ],
-  []
-);
+    () => [
+      { type: "section", id: "home", label: "Home" },
+      { type: "section", id: "filiera", label: "Filiera" },
+      { type: "section", id: "servizi", label: "Servizi" },
+      { type: "section", id: "perche", label: "Perché" },
+      { type: "section", id: "coldsharing", label: "ColdSharing" },
+      { type: "section", id: "ceo", label: "CEO" },
+      { type: "section", id: "contatti", label: "Contatti" },
+    ],
+    []
+  );
 
-
-  function go(item) {
-    setMenuOpen(false);
-
-    // Vai a una pagina
-    if (item.type === "page") {
-      window.location.href = item.to;
-      return;
-    }
-
-    // Scroll su sezione landing
-    const el = document.getElementById(item.id);
+  // ✅ scroll robusto + offset (navbar sticky)
+  const scrollToId = useCallback((id) => {
+    const el = document.getElementById(id);
     if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
 
+    const yOffset = -72; // regola se serve (altezza navbar)
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, []);
+
+  // ✅ se arrivo su "/#filiera" da un'altra pagina, scrollo quando la landing è montata
+  useEffect(() => {
+    const id = (location.hash || "").replace("#", "");
+    if (!id) return;
+
+    const t = setTimeout(() => scrollToId(id), 50);
+    return () => clearTimeout(t);
+  }, [location.hash, scrollToId]);
 
   return (
     <div className="page">
-      {/* ✅ NAVBAR UNICA (hamburger sempre visibile: landing + pagine) */}
+      {/* Se in futuro vuoi passare la nav: <Navbar nav={NAV} /> */}
       <Navbar />
 
       <main>
-        {/* HOME (resta in frame, ok) */}
+        {/* HOME */}
         <section id="home" className="section" style={{ paddingTop: 24 }}>
           <div className="container">
             <div className="frame">
@@ -73,7 +81,7 @@ export default function LandingPage() {
                       href="#contatti"
                       onClick={(e) => {
                         e.preventDefault();
-                        go("contatti");
+                        scrollToId("contatti");
                       }}
                     >
                       Richiedi una valutazione
@@ -84,7 +92,7 @@ export default function LandingPage() {
                       href="#coldsharing"
                       onClick={(e) => {
                         e.preventDefault();
-                        go("coldsharing");
+                        scrollToId("coldsharing");
                       }}
                     >
                       Vedi un progetto reale
@@ -97,14 +105,19 @@ export default function LandingPage() {
                 </div>
 
                 <div className="heroRight">
-                  <img className="heroImage" src={homeImg} alt="Il digitale che fa crescere il tuo prodotto" loading="eager" />
+                  <img
+                    className="heroImage"
+                    src={homeImg}
+                    alt="Il digitale che fa crescere il tuo prodotto"
+                    loading="eager"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* FILIERA — full-bleed (NO frame, NO box) */}
+        {/* FILIERA — full-bleed */}
         <section id="filiera" className="section filieraSection">
           <div className="container">
             <div className="filieraFull">
@@ -130,7 +143,7 @@ export default function LandingPage() {
                     href="#contatti"
                     onClick={(e) => {
                       e.preventDefault();
-                      go("contatti");
+                      scrollToId("contatti");
                     }}
                   >
                     Dimmi dove sei
@@ -141,7 +154,7 @@ export default function LandingPage() {
                     href="#coldsharing"
                     onClick={(e) => {
                       e.preventDefault();
-                      go("coldsharing");
+                      scrollToId("coldsharing");
                     }}
                   >
                     Vedi ColdSharing
@@ -311,161 +324,160 @@ export default function LandingPage() {
           </div>
         </section>
 
-       {/* ================= IL NOSTRO PROGETTO — ColdSharing ================= */}
-<section id="coldsharing" className="section projectSection">
-  <div className="container">
-    <div className="projectSplit">
-      <div className="projectLeft">
-        <p className="projectKicker">Case study • Prodotto Marvincla</p>
+        {/* ================= IL NOSTRO PROGETTO — ColdSharing ================= */}
+        <section id="coldsharing" className="section projectSection">
+          <div className="container">
+            <div className="projectSplit">
+              <div className="projectLeft">
+                <p className="projectKicker">Case study • Prodotto Marvincla</p>
 
-        <h2 className="projectTitle">
-          Il nostro progetto<span className="projectTitleAccent"> ColdSharing</span>
-        </h2>
+                <h2 className="projectTitle">
+                  Il nostro progetto<span className="projectTitleAccent"> ColdSharing</span>
+                </h2>
 
-        <p className="projectLead">
-          Cold Sharing è una piattaforma digitale dedicata alla <b>filiera agroalimentare</b>, pensata per ottimizzare la gestione
-          del freddo e la <b>condivisione delle risorse logistiche</b>.
-        </p>
+                <p className="projectLead">
+                  Cold Sharing è una piattaforma digitale dedicata alla <b>filiera agroalimentare</b>, pensata per ottimizzare la gestione
+                  del freddo e la <b>condivisione delle risorse logistiche</b>.
+                </p>
 
-        <div className="projectCards">
-          <div className="projectCard">
-            <div className="projectCardTop">
-              <span className="projectCardDot" />
-              <span className="projectCardTag">Ricerca</span>
-            </div>
-            <h3>Trova spazi in pochi minuti</h3>
-            <p>Filtri rapidi, risultati puliti, contatto immediato con l’operatore.</p>
-          </div>
-
-          <div className="projectCard">
-            <div className="projectCardTop">
-              <span className="projectCardDot" />
-              <span className="projectCardTag">Valore</span>
-            </div>
-            <h3>Riduci sprechi e inefficienze</h3>
-            <p>Valorizza capacità inutilizzata e ottimizza costi logistici.</p>
-          </div>
-
-          <div className="projectCard">
-            <div className="projectCardTop">
-              <span className="projectCardDot" />
-              <span className="projectCardTag">Connessioni</span>
-            </div>
-            <h3>Domanda ↔ Offerta senza attriti</h3>
-            <p>Una piattaforma unica che accelera le relazioni di filiera.</p>
-          </div>
-        </div>
-
-        <div className="projectCtas">
-          <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
-            Apri ColdSharing
-          </a>
-
-          <a className="btn btnGhost" href="/coldsharing/perche-e-nata">
-            Perché è nata
-          </a>
-        </div>
-
-        <p className="projectNote">*ColdSharing è un marchio di Marvincla SRL*</p>
-      </div>
-
-      {/* ✅ MOCKUP PHONE RIPRISTINATO */}
-      <div className="projectRight">
-        <div className="handWrap" aria-label="Mockup smartphone ColdSharing">
-          <div className="handPalm" aria-hidden="true" />
-          <div className="handThumb" aria-hidden="true" />
-
-          <div className="phone">
-            <div className="phoneNotch" aria-hidden="true" />
-            <div className="phoneScreen">
-              <div className="csUiTop">
-                <div className="csUiBrand">
-                  <span className="csUiLogo">❄️</span>
-                  <div>
-                    <div className="csUiName">ColdSharing</div>
-                    <div className="csUiSub">Locali refrigerati • Ricerca rapida</div>
+                <div className="projectCards">
+                  <div className="projectCard">
+                    <div className="projectCardTop">
+                      <span className="projectCardDot" />
+                      <span className="projectCardTag">Ricerca</span>
+                    </div>
+                    <h3>Trova spazi in pochi minuti</h3>
+                    <p>Filtri rapidi, risultati puliti, contatto immediato con l’operatore.</p>
                   </div>
-                </div>
-                <div className="csUiChip">B2B</div>
-              </div>
 
-              <div className="csUiSearch">
-                <div className="csUiSearchIcon">🔎</div>
-                <div className="csUiSearchText">Cerca per città, m³, temperatura…</div>
-              </div>
-
-              <div className="csUiFilters">
-                <span className="csUiPill">📍 Zona</span>
-                <span className="csUiPill">🌡️ Temp</span>
-                <span className="csUiPill">📦 Capienza</span>
-                <span className="csUiPill">✅ Dispon.</span>
-              </div>
-
-              <div className="csUiList">
-                <div className="csUiCard">
-                  <div className="csUiThumb" />
-                  <div className="csUiMeta">
-                    <div className="csUiRow">
-                      <b>Bari • 0–4°C</b>
-                      <span className="csUiPrice">50 €/gg</span>
+                  <div className="projectCard">
+                    <div className="projectCardTop">
+                      <span className="projectCardDot" />
+                      <span className="projectCardTag">Valore</span>
                     </div>
-                    <div className="csUiSmall">Cella frigo di 320 m³ • Capacità 120 pallets</div>
-                    <div className="csUiTags">
-                      <span>Uva</span>
-                      <span>Cella di conservazione</span>
-                      <span>Conferma immediata</span>
+                    <h3>Riduci sprechi e inefficienze</h3>
+                    <p>Valorizza capacità inutilizzata e ottimizza costi logistici.</p>
+                  </div>
+
+                  <div className="projectCard">
+                    <div className="projectCardTop">
+                      <span className="projectCardDot" />
+                      <span className="projectCardTag">Connessioni</span>
                     </div>
+                    <h3>Domanda ↔ Offerta senza attriti</h3>
+                    <p>Una piattaforma unica che accelera le relazioni di filiera.</p>
                   </div>
                 </div>
 
-                <div className="csUiCard">
-                  <div className="csUiThumb alt" />
-                  <div className="csUiMeta">
-                    <div className="csUiRow">
-                      <b>Roma • -18°C</b>
-                      <span className="csUiPrice">70 €/gg</span>
-                    </div>
-                    <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 500 bins</div>
-                    <div className="csUiTags">
-                      <span>Surgelati</span>
-                      <span>Cancellazione gratuita</span>
-                      <span>Conferma immediata</span>
-                    </div>
-                  </div>
+                <div className="projectCtas">
+                  <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                    Apri ColdSharing
+                  </a>
+
+                  <a className="btn btnGhost" href="/coldsharing/perche-e-nata">
+                    Perché è nata
+                  </a>
                 </div>
 
-                <div className="csUiCard">
-                  <div className="csUiThumb" />
-                  <div className="csUiMeta">
-                    <div className="csUiRow">
-                      <b>Siracusa • 3–7°C</b>
-                      <span className="csUiPrice">100 €/gg</span>
-                    </div>
-                    <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 250 pallets</div>
-                    <div className="csUiTags">
-                      <span>Arance</span>
-                      <span>Cancellazione gratuita</span>
-                      <span>Richiesta di prenotazione</span>
+                <p className="projectNote">*ColdSharing è un marchio di Marvincla SRL*</p>
+              </div>
+
+              {/* MOCKUP PHONE */}
+              <div className="projectRight">
+                <div className="handWrap" aria-label="Mockup smartphone ColdSharing">
+                  <div className="handPalm" aria-hidden="true" />
+                  <div className="handThumb" aria-hidden="true" />
+
+                  <div className="phone">
+                    <div className="phoneNotch" aria-hidden="true" />
+                    <div className="phoneScreen">
+                      <div className="csUiTop">
+                        <div className="csUiBrand">
+                          <span className="csUiLogo">❄️</span>
+                          <div>
+                            <div className="csUiName">ColdSharing</div>
+                            <div className="csUiSub">Locali refrigerati • Ricerca rapida</div>
+                          </div>
+                        </div>
+                        <div className="csUiChip">B2B</div>
+                      </div>
+
+                      <div className="csUiSearch">
+                        <div className="csUiSearchIcon">🔎</div>
+                        <div className="csUiSearchText">Cerca per città, m³, temperatura…</div>
+                      </div>
+
+                      <div className="csUiFilters">
+                        <span className="csUiPill">📍 Zona</span>
+                        <span className="csUiPill">🌡️ Temp</span>
+                        <span className="csUiPill">📦 Capienza</span>
+                        <span className="csUiPill">✅ Dispon.</span>
+                      </div>
+
+                      <div className="csUiList">
+                        <div className="csUiCard">
+                          <div className="csUiThumb" />
+                          <div className="csUiMeta">
+                            <div className="csUiRow">
+                              <b>Bari • 0–4°C</b>
+                              <span className="csUiPrice">50 €/gg</span>
+                            </div>
+                            <div className="csUiSmall">Cella frigo di 320 m³ • Capacità 120 pallets</div>
+                            <div className="csUiTags">
+                              <span>Uva</span>
+                              <span>Cella di conservazione</span>
+                              <span>Conferma immediata</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="csUiCard">
+                          <div className="csUiThumb alt" />
+                          <div className="csUiMeta">
+                            <div className="csUiRow">
+                              <b>Roma • -18°C</b>
+                              <span className="csUiPrice">70 €/gg</span>
+                            </div>
+                            <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 500 bins</div>
+                            <div className="csUiTags">
+                              <span>Surgelati</span>
+                              <span>Cancellazione gratuita</span>
+                              <span>Conferma immediata</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="csUiCard">
+                          <div className="csUiThumb" />
+                          <div className="csUiMeta">
+                            <div className="csUiRow">
+                              <b>Siracusa • 3–7°C</b>
+                              <span className="csUiPrice">100 €/gg</span>
+                            </div>
+                            <div className="csUiSmall">Cella frigo di 500 m³ • Capacità 250 pallets</div>
+                            <div className="csUiTags">
+                              <span>Arance</span>
+                              <span>Cancellazione gratuita</span>
+                              <span>Richiesta di prenotazione</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="csUiBottom">
+                        <div className="csUiNavItem active">Home</div>
+                        <div className="csUiNavItem">Cerca</div>
+                        <div className="csUiNavItem">Preferiti</div>
+                        <div className="csUiNavItem">Profilo</div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div className="csUiBottom">
-                <div className="csUiNavItem active">Home</div>
-                <div className="csUiNavItem">Cerca</div>
-                <div className="csUiNavItem">Preferiti</div>
-                <div className="csUiNavItem">Profilo</div>
-              </div>
+              {/* FINE MOCKUP */}
             </div>
           </div>
-        </div>
-      </div>
-      {/* ✅ FINE MOCKUP */}
-    </div>
-  </div>
-</section>
-
+        </section>
 
         {/* ================= CEO ================= */}
         <section id="ceo" className="section ceoSectionV2">
@@ -508,7 +520,7 @@ export default function LandingPage() {
                     href="#contatti"
                     onClick={(e) => {
                       e.preventDefault();
-                      go("contatti");
+                      scrollToId("contatti");
                     }}
                   >
                     Contattaci
@@ -571,7 +583,11 @@ export default function LandingPage() {
                     onClick={(e) => {
                       e.preventDefault();
                       const el = document.getElementById("contatti-form");
-                      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      if (!el) return;
+
+                      const yOffset = -72;
+                      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                      window.scrollTo({ top: y, behavior: "smooth" });
                     }}
                   >
                     Compila in 30 secondi
@@ -582,7 +598,7 @@ export default function LandingPage() {
                     href="#home"
                     onClick={(e) => {
                       e.preventDefault();
-                      go("home");
+                      scrollToId("home");
                     }}
                   >
                     Torna su

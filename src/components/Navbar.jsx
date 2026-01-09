@@ -65,29 +65,19 @@ export default function Navbar() {
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (!el) return false;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  const yOffset = -72;
+  const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  window.scrollTo({ top: y, behavior: "smooth" });
   return true;
 }
 
 function goSection(id) {
   onClose();
-
-  // siamo già in landing
   if (location.pathname === "/") {
     scrollToId(id);
     return;
   }
-
-  // vai alla landing con hash
   navigate(`/#${id}`);
-
-  // aspetta che la landing monti e poi scrolla
-  let tries = 0;
-  const timer = setInterval(() => {
-    tries += 1;
-    const ok = scrollToId(id);
-    if (ok || tries > 30) clearInterval(timer);
-  }, 50);
 }
 
 function goPage(to) {
@@ -97,11 +87,11 @@ function goPage(to) {
 }
 
 
-  function goPage(to) {
-    onClose();
-    navigate(to);
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }
+function goPage(to) {
+  onClose();
+  navigate(to);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
 
   function goItem(item) {
     if (item.type === "page") return goPage(item.to);
