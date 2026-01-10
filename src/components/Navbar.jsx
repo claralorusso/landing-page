@@ -18,7 +18,6 @@ import {
   Spacer,
   Image,
   Button,
-  Divider,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -38,16 +37,12 @@ const LANDING_NAV = [
   { id: "coldsharing", label: "ColdSharing" },
   { id: "ceo", label: "CEO" },
 ];
+
 const PAGES_NAV = [
   { to: "/digitalizzazione-agroalimentare", label: "Soluzioni digitali per aziende agroalimentari" },
   { to: "/coldsharing/perche-e-nata", label: "Perché è nata ColdSharing" },
   { to: "/blog", label: "Blog" },
   { to: "/contatti", label: "Contatti" },
-];
-
-const NAV = [
-  ...LANDING_NAV.map((x) => ({ type: x.to ? "page" : "section", ...x })),
-  ...PAGES_NAV.map((x) => ({ type: "page", ...x })),
 ];
 
 export default function Navbar() {
@@ -62,40 +57,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-function scrollToId(id) {
-  const el = document.getElementById(id);
-  if (!el) return false;
-  const yOffset = -72;
-  const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  window.scrollTo({ top: y, behavior: "smooth" });
-  return true;
-}
-
-function goSection(id) {
-  onClose();
-  if (location.pathname === "/") {
-    scrollToId(id);
-    return;
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return false;
+    const yOffset = -72;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+    return true;
   }
-  navigate(`/#${id}`);
-}
 
-function goPage(to) {
-  onClose();
-  navigate(to);
-  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-}
+  function goSection(id) {
+    onClose();
+    if (location.pathname === "/") {
+      scrollToId(id);
+      return;
+    }
+    navigate(`/#${id}`);
+  }
 
-
-function goPage(to) {
-  onClose();
-  navigate(to);
-  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-}
-
-  function goItem(item) {
-    if (item.type === "page") return goPage(item.to);
-    return goSection(item.id);
+  function goPage(to) {
+    onClose();
+    navigate(to);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
 
   return (
@@ -110,6 +93,8 @@ function goPage(to) {
       transition="box-shadow .2s ease, background .2s ease"
       boxShadow={scrolled ? "0 8px 24px rgba(0,0,0,0.25)" : "none"}
       backdropFilter="blur(12px)"
+      /* prevenzione overflow in casi limite */
+      overflowX="clip"
     >
       <Container maxW="7xl" py={3}>
         <Flex align="center" gap={4}>
@@ -118,7 +103,6 @@ function goPage(to) {
             href="/"
             onClick={(e) => {
               e.preventDefault();
-              // Sempre home top
               if (location.pathname === "/") {
                 const el = document.getElementById("home");
                 el?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -160,7 +144,7 @@ function goPage(to) {
 
           <Spacer />
 
-          {/* ✅ Hamburger sempre visibile */}
+          {/* Hamburger */}
           <IconButton
             aria-label="Apri menu"
             onClick={onOpen}
@@ -177,7 +161,13 @@ function goPage(to) {
       {/* DRAWER MENU */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent bg={COLORS.bgDark} color={COLORS.text}>
+        <DrawerContent
+          bg={COLORS.bgDark}
+          color={COLORS.text}
+          w={{ base: "82vw", sm: "360px" }}
+          maxW="40vw"
+          overflowX="hidden"
+        >
           <DrawerHeader borderBottomWidth="1px" borderColor={COLORS.border}>
             <HStack spacing={3}>
               <Box
@@ -205,31 +195,37 @@ function goPage(to) {
             </HStack>
           </DrawerHeader>
 
-          <DrawerBody py={6}>
-            <VStack align="stretch" spacing={3}>
-              {/* Sezione: Landing */}
-          <VStack align="stretch" spacing={2}>
-            {LANDING_NAV.map((l) => (
-              <Button
-                key={l.id}
-                variant="ghost"
-                justifyContent="flex-start"
-                borderRadius="14px"
-                color={COLORS.text}
-                _hover={{ bg: "rgba(255,255,255,0.06)" }}
-                onClick={() => goSection(l.id)}
-              >
-                {l.label}
-              </Button>
-            ))}
-          </VStack>
+          <DrawerBody py={6} px={4}>
+            <VStack align="stretch" spacing={3} w="100%" minW="0">
+              {/* Landing */}
+              <VStack align="stretch" spacing={2} w="100%" minW="0">
+                {LANDING_NAV.map((l) => (
+                  <Button
+                    key={l.id}
+                    variant="ghost"
+                    justifyContent="flex-start"
+                    borderRadius="14px"
+                    color={COLORS.text}
+                    _hover={{ bg: "rgba(255,255,255,0.06)" }}
+                    onClick={() => goSection(l.id)}
+                    /* ✅ testo va a capo */
+                    whiteSpace="normal"
+                    textAlign="left"
+                    wordBreak="break-word"
+                    w="100%"
+                    minW="0"
+                  >
+                    {l.label}
+                  </Button>
+                ))}
+              </VStack>
 
-              {/* Sezione: Pagine */}
+              {/* Pagine */}
               <Text fontSize="sm" color={COLORS.muted} fontWeight="800" letterSpacing="0.4px">
                 PAGINE
               </Text>
 
-              <VStack align="stretch" spacing={2}>
+              <VStack align="stretch" spacing={2} w="100%" minW="0">
                 {PAGES_NAV.map((p) => (
                   <Button
                     key={p.to}
@@ -239,13 +235,21 @@ function goPage(to) {
                     color={COLORS.text}
                     _hover={{ bg: "rgba(255,255,255,0.06)" }}
                     onClick={() => goPage(p.to)}
+                    /* ✅ testo va a capo (fix principale) */
+                    whiteSpace="normal"
+                    textAlign="left"
+                    wordBreak="break-word"
+                    w="100%"
+                    minW="0"
+                    py={3}
+                    h="auto"
                   >
                     {p.label}
                   </Button>
                 ))}
               </VStack>
 
-              {/* CTA in fondo */}
+              {/* CTA */}
               <Button
                 w="100%"
                 bg="#B7FF2A"
@@ -257,7 +261,6 @@ function goPage(to) {
               >
                 Parliamone
               </Button>
-
 
               <Text color="rgba(255,255,255,0.55)" fontSize="xs" pt={2}>
                 Suggerimento: usa “Pagine” per approfondimenti, “Sezioni” per tornare alla landing.
