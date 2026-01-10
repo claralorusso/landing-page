@@ -161,13 +161,13 @@ export default function Navbar() {
       {/* DRAWER MENU */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent
-          bg={COLORS.bgDark}
-          color={COLORS.text}
-          w={{ base: "85vw", sm: "360px" }}
-          maxW="50vw"
-          overflowX="hidden"
-        >
+          <DrawerContent
+            bg={COLORS.bgDark}
+            color={COLORS.text}
+            w={{ base: "86vw", sm: "360px" }}
+            maxW="70vw"
+            overflowX="hidden"
+          >
           <DrawerHeader borderBottomWidth="1px" borderColor={COLORS.border}>
             <HStack spacing={3}>
               <Box
@@ -208,12 +208,15 @@ export default function Navbar() {
                     color={COLORS.text}
                     _hover={{ bg: "rgba(255,255,255,0.06)" }}
                     onClick={() => goSection(l.id)}
-                    /* ✅ testo va a capo */
                     whiteSpace="normal"
                     textAlign="left"
-                    wordBreak="break-word"
+                    wordBreak="normal"
+                    overflowWrap="anywhere"
                     w="100%"
                     minW="0"
+                    /* ✅ solo mobile */
+                    fontSize={{ base: "18px", sm: "16px" }}
+                    py={{ base: 4, sm: 3 }}
                   >
                     {l.label}
                   </Button>
@@ -235,14 +238,16 @@ export default function Navbar() {
                     color={COLORS.text}
                     _hover={{ bg: "rgba(255,255,255,0.06)" }}
                     onClick={() => goPage(p.to)}
-                    /* ✅ testo va a capo (fix principale) */
                     whiteSpace="normal"
                     textAlign="left"
-                    wordBreak="break-word"
+                    wordBreak="normal"
+                    overflowWrap="anywhere"
                     w="100%"
                     minW="0"
-                    py={3}
                     h="auto"
+                    /* ✅ solo mobile */
+                    fontSize={{ base: "17px", sm: "15px" }}
+                    py={{ base: 4, sm: 3 }}
                   >
                     {p.label}
                   </Button>
@@ -258,10 +263,11 @@ export default function Navbar() {
                 fontWeight="900"
                 _hover={{ filter: "brightness(1.05)" }}
                 onClick={() => goPage("/contatti")}
+                fontSize={{ base: "18px", sm: "16px" }}
+                py={{ base: 6, sm: 5 }}
               >
                 Parliamone
               </Button>
-
               <Text color="rgba(255,255,255,0.55)" fontSize="xs" pt={2}>
                 Suggerimento: usa “Pagine” per approfondimenti, “Sezioni” per tornare alla landing.
               </Text>
