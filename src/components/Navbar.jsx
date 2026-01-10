@@ -164,8 +164,8 @@ export default function Navbar() {
         <DrawerContent
           bg={COLORS.bgDark}
           color={COLORS.text}
-          w={{ base: "82vw", sm: "360px" }}
-          maxW="40vw"
+          w={{ base: "85vw", sm: "360px" }}
+          maxW="50vw"
           overflowX="hidden"
         >
           <DrawerHeader borderBottomWidth="1px" borderColor={COLORS.border}>
