@@ -51,7 +51,7 @@ export default function Contatti() {
   }
 
   return (
-    <Box bg={COLORS.bg} color={COLORS.text} minH="100vh">
+    <Box bg={COLORS.bg} color={COLORS.text} minH="100dvh">
       <Navbar />
 
       {/* HERO */}

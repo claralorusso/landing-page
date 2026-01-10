@@ -13,6 +13,12 @@ html, body {
   padding: 0;
 }
 
+/* iOS Safari può “ingrandire” i testi e rompere le griglie: disattiva l’auto text scaling */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   display: block; /* IMPORTANTISSIMO: niente flex qui */
   min-width: 320px;

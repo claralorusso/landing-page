@@ -30,6 +30,8 @@ html, body{ height:100%; }
 html{
   /* migliora anchor scroll con navbar sticky */
   scroll-padding-top: calc(var(--navH) + 18px);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body{
@@ -44,7 +46,8 @@ body{
 a{ color:inherit; text-decoration:none; }
 img{ display:block; max-width:100%; }
 
-.page{ min-height:100vh; }
+/* 100dvh evita i bug iOS di 100vh (barra indirizzi che cambia altezza) */
+.page{ min-height:100dvh; }
 
 /* Container FULL width */
 .container{
@@ -54,6 +57,11 @@ img{ display:block; max-width:100%; }
 }
 @media (max-width: 980px){ .container{ padding: 0 24px; } }
 @media (max-width: 520px){ .container{ padding: 0 16px; } }
+
+/* Utility: nascondi solo su mobile */
+@media (max-width: 520px){
+  .hideOnMobile{ display:none !important; }
+}
 
 /* ===== NAV ===== */
 .navWrap{

@@ -376,7 +376,14 @@ export default function ColdsharingPercheNata() {
               <div style={styles.lightFrame}>
                 <h2 style={styles.h2}>5 motivi per cui dovresti usarlo.</h2>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginTop: 14 }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                    gap: 18,
+                    marginTop: 14,
+                    alignItems: "start",
+                  }}>
                   <div style={{ display: "grid", gap: 12 }}>
                     <Reason icon="🔎" title="Trovi il locale adatto a te">
                       Scegli celle frigorifere certificate vicino a te, filtrando per prodotto, temperatura e capienza.
@@ -397,7 +404,7 @@ export default function ColdsharingPercheNata() {
 
                   <div style={styles.previewBox}>
                     <div style={styles.previewTag}>🔎 COLDSHARING</div>
-                    <div style={styles.previewImg}>
+                    <div style={styles.previewImg} className="hideOnMobile">
                     <img
                         src={previewImg}
                         alt="Celle frigorifere disponibili su ColdSharing"
@@ -694,7 +701,7 @@ const styles = {
   paradoxGrid: {
     marginTop: 12,
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: 10,
   },
 

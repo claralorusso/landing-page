@@ -70,7 +70,7 @@ export default function Cookies() {
   }, []);
 
   return (
-    <Box bg={COLORS.bg} color={COLORS.text} minH="100vh">
+    <Box bg={COLORS.bg} color={COLORS.text} minH="100dvh">
       <Container maxW="6xl" py={[10, 16]}>
         <VStack align="start" spacing={6}>
           <Heading size="lg" color={COLORS.heading}>

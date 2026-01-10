@@ -138,7 +138,13 @@ export default function DigitalizzazioneAgroalimentare() {
                   Prodotti e piattaforme nate da problemi reali. Qui due esempi concreti.
                 </p>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 18 }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: 14,
+                    marginTop: 18,
+                  }}>
                   <ProjectCard
                     tag="Piattaforma • Filiera del freddo"
                     title="ColdSharing"
@@ -277,7 +283,8 @@ const styles = {
   grid3: {
     marginTop: 18,
     display: "grid",
-    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    /* su mobile evita 3 colonne forzate: si adatta in automatico */
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
     gap: 14,
   },
 

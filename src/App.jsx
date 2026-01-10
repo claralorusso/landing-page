@@ -30,13 +30,13 @@ export default function App() {
       {/* ✅ articoli statici (prima del dinamico) */}
       <Route path="/blog/come-e-nata-marvincla" element={<BlogMarvinclaOrigine />} />
 
+      <Route path="/blog/come-si-realizzano-le-celle-frigorifere" element={<BlogCelleFrigorifere />} />
+
       {/* ✅ fallback dinamico solo per gli altri articoli */}
       <Route path="/blog/:slug" element={<BlogPost />} />
 
       {/* ✅ fcontatti */}
       <Route path="/contatti" element={<Contatti />} />
-
-      <Route path="/blog/come-si-realizzano-le-celle-frigorifere" element={<BlogCelleFrigorifere />} />
 
     </Routes>
   );
