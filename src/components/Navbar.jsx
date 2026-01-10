@@ -77,6 +77,14 @@ export default function Navbar() {
 
   function goPage(to) {
     onClose();
+
+    // Se sei già su quella pagina, scrolla e basta
+    if (location.pathname === to) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      return;
+    }
+
+    // Altrimenti naviga (ScrollToTop farà il resto)
     navigate(to);
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }

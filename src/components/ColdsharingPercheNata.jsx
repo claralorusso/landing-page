@@ -48,7 +48,7 @@ export default function ColdsharingPercheNata() {
                       Apri ColdSharing
                     </a>
 
-                    <a className="btn btnPrimary" href="/#contatti">
+                    <a className="btn btnPrimary" href="/contatti">
                       Parliamone
                     </a>
                   </div>
@@ -169,7 +169,7 @@ export default function ColdsharingPercheNata() {
                   <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
                     Vedi la piattaforma
                   </a>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
                 </div>
@@ -244,7 +244,7 @@ export default function ColdsharingPercheNata() {
                       <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
                         Apri ColdSharing
                       </a>
-                      <a className="btn btnPrimary" href="/#contatti">
+                      <a className="btn btnPrimary" href="/contatti">
                         Parliamone
                       </a>
                     </div>
@@ -331,7 +331,7 @@ export default function ColdsharingPercheNata() {
                   <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
                     Vai alla piattaforma
                   </a>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Valutiamo il tuo caso
                   </a>
                 </div>
@@ -421,7 +421,7 @@ export default function ColdsharingPercheNata() {
                       <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
                         Vai alla piattaforma
                       </a>
-                      <a className="btn btnPrimary" href="/#contatti">
+                      <a className="btn btnPrimary" href="/contatti">
                         Contattaci
                       </a>
                     </div>
@@ -446,7 +446,7 @@ export default function ColdsharingPercheNata() {
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
                 </div>

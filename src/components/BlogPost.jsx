@@ -111,7 +111,7 @@ export default function BlogPost() {
                   <Link className="btn btnGhost" to={`/blog/${nextPost.slug}`}>
                     Leggi il prossimo
                   </Link>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
                 </div>

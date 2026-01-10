@@ -185,15 +185,15 @@ export default function BlogMarvinclaOrigine() {
                 <div>
                   <div style={styles.kicker}>PROSSIMO ARTICOLO</div>
                   <div style={styles.nextTitle}>
-                    Come nasce la piattaforma ColdSharing
+                    Come nasce la piattaforma ColdSharing per la refrigerazione industriale
                   </div>
                 </div>
 
                 <div style={styles.nextBtns}>
-                  <a className="btn btnGhost" href="/blog">
-                    Torna al Blog
+                  <a className="btn btnPrimary" href="/coldsharing/perche-e-nata">
+                    Vai all'articolo
                   </a>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
                 </div>

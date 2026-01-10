@@ -120,9 +120,6 @@ export default function Contatti() {
                 <Heading as="h3" fontSize={{ base: "18px", md: "20px" }} fontWeight="950">
                   Contattaci per un preventivo
                 </Heading>
-                <Text color={COLORS.muted} fontSize="14px">
-                  4 campi + privacy. L’invio apre la tua email (mailto).
-                </Text>
               </VStack>
 
               <form onSubmit={onSubmit}>

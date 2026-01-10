@@ -131,7 +131,7 @@ export default function Blog() {
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
                   <a className="btn btnPrimary" href="/digitalizzazione-agroalimentare">

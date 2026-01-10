@@ -38,7 +38,7 @@ export default function DigitalizzazioneAgroalimentare() {
                   </p>
 
                   <div className="heroCtas">
-                    <a className="btn btnPrimary" href="/#contatti">
+                    <a className="btn btnPrimary" href="/contatti">
                       Richiedi una valutazione
                     </a>
                   </div>
@@ -91,7 +91,7 @@ export default function DigitalizzazioneAgroalimentare() {
                 </div>
 
                 <div style={styles.ctaRow}>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Parliamone
                   </a>
                   <a className="btn btnPrimary" href="/coldsharing/perche-e-nata">
@@ -158,7 +158,7 @@ export default function DigitalizzazioneAgroalimentare() {
                     title="Nitra System"
                     desc="Progetto digitale e presenza online per un brand tecnico e industriale."
                     cta1={{ label: "Visita Nitra System", href: "https://www.nitrasystem.com" }}
-                    cta2={{ label: "Parliamone", href: "/#contatti" }}
+                    cta2={{ label: "Parliamone", href: "/contatti" }}
                   />
                 </div>
               </div>
@@ -180,7 +180,7 @@ export default function DigitalizzazioneAgroalimentare() {
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>
-                  <a className="btn btnPrimary" href="/#contatti">
+                  <a className="btn btnPrimary" href="/contatti">
                     Richiedi una valutazione
                   </a>
                 </div>

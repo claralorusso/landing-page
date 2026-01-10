@@ -540,7 +540,7 @@ export default function LandingPage() {
           <div className="container">
             <div className="contactWrapV2">
               <div className="contactLeftV2">
-                <h2 className="contactTitleV2">Parliamo del tuo progetto</h2>
+                <h2 className="contactTitleV2">Parlaci del tuo progetto</h2>
                 <p className="contactLeadV2">
                   Scopri come <b>Marvincla</b> può supportare la tua azienda nella <b>digitalizzazione della filiera</b>.
                 </p>
@@ -592,20 +592,7 @@ export default function LandingPage() {
                   >
                     Compila in 30 secondi
                   </a>
-
-                  <a
-                    className="btn btnGhost"
-                    href="#home"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToId("home");
-                    }}
-                  >
-                    Torna su
-                  </a>
                 </div>
-
-                <p className="contactNoteV2">*Nessun impegno: ti mandiamo una risposta operativa e una prima roadmap.*</p>
               </div>
 
               <div className="contactRightV2" id="contatti-form">
