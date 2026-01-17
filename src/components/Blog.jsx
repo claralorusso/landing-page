@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import homeImg from "../assets/blog.png";
 import logoM from "../assets/logoM2.png";
 import coldsharinglogo from "../assets/coldsharinglogo.png";
-import refromCover from "../assets/refrom.png"; // (creala o usa un placeholder)
+import refromCover from "../assets/logorefrom.png"; // (creala o usa un placeholder)
 
 
 // ✅ Data con URL esplicita: ogni card porta alla pagina corretta (NON a /blog/:slug)

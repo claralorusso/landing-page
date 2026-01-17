@@ -65,7 +65,8 @@ export default function LandingPage() {
                   </p>
 
                   <h1 className="h1">
-                    Il partner che fa crescere
+                   <p>Il partner che fa </p> 
+                   crescere
                     <br />
                     <span className="accent">il tuo prodotto.</span>
                   </h1>
@@ -78,7 +79,7 @@ export default function LandingPage() {
                   <div className="heroCtas">
                     <a
                       className="btn btnPrimary"
-                      href="#contatti"
+                      href="contatti"
                       onClick={(e) => {
                         e.preventDefault();
                         scrollToId("contatti");
@@ -88,8 +89,8 @@ export default function LandingPage() {
                     </a>
 
                     <a
-                      className="btn btnGhost"
-                      href="#coldsharing"
+                      className="btn btnPrimary"
+                      href="/coldsharing/perche-e-nata"
                       onClick={(e) => {
                         e.preventDefault();
                         scrollToId("coldsharing");
@@ -151,7 +152,7 @@ export default function LandingPage() {
 
                   <a
                     className="btn btnGhost"
-                    href="#coldsharing"
+                    href="/coldsharing/perche-e-nata"
                     onClick={(e) => {
                       e.preventDefault();
                       scrollToId("coldsharing");
