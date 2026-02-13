@@ -73,7 +73,6 @@ export default function Footer() {
       bg={COLORS.bg}
       borderTop="1px solid"
       borderColor={COLORS.border}
-      mt={24}
     >
       <Container maxW="6xl" px={[4, 6, 8]} py={[8, 10]}>
         <Flex
@@ -87,8 +86,8 @@ export default function Footer() {
               Marvincla Srl – Soluzioni digitali per aziende agroalimentari.
             </Text>
             <Text fontSize="sm" color={COLORS.muted} maxW="42ch">
-              Digitalizzazione, siti web ed e-commerce B2B per aziende agroalimentari.
-              Soluzioni digitali per la filiera food.
+              Digitalizzazione, siti web ed e-commerce B2B per aziende
+              agroalimentari. Soluzioni digitali per la filiera food.
             </Text>
 
             <Box>
@@ -157,15 +156,17 @@ export default function Footer() {
           gap={3}
         >
           <Text fontSize="sm" color={COLORS.muted}>
-            © {year} Marvincla SRL — Tutti i diritti riservati | P.IVA 08760160724 – REA BA
-            648160 – C.S. €10.000 i.v.
+            © {year} Marvincla SRL — Tutti i diritti riservati | P.IVA
+            08760160724 – REA BA 648160 – C.S. €10.000 i.v.
           </Text>
 
           <HStack spacing={4} flexWrap="wrap">
             <ChakraLink
               as={RouterLink}
               to="/privacy"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -176,7 +177,9 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/cookies"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -187,7 +190,9 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/blog"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -198,7 +203,9 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/coldsharing/perche-e-nata"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -209,7 +216,9 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/digitalizzazione-agroalimentare"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}
@@ -221,7 +230,9 @@ export default function Footer() {
             <ChakraLink
               as={RouterLink}
               to="/contatti"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
               fontSize="sm"
               color={COLORS.muted}
               _hover={{ color: "white" }}

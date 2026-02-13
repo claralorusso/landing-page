@@ -1,43 +1,41 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
-import homeImg from "../assets/blog.png";
 import logoM from "../assets/logoM2.png";
 import coldsharinglogo from "../assets/coldsharinglogo.png";
 import refromCover from "../assets/logorefrom.png"; // (creala o usa un placeholder)
-
 
 // ✅ Data con URL esplicita: ogni card porta alla pagina corretta (NON a /blog/:slug)
 const POSTS = [
   {
     url: "/blog/come-e-nata-marvincla",
-    title: "Come è nata Marvincla: dall’esperienza sul campo a un metodo digitale",
+    title:
+      "Come è nata Marvincla: dall’esperienza sul campo a un metodo digitale",
     excerpt:
       "Dall’esperienza nella refrigerazione industriale alla consulenza di Supply Chain: da qui nasce il metodo Marvincla.",
     meta: "6 min • Visione & Metodo Marvincla",
     image: logoM,
   },
-    {
+  {
     url: "/coldsharing/perche-e-nata",
-    title: "Come nasce una piattaforma B2B per la refrigerazione agroalimentare",
+    title:
+      "Come nasce una piattaforma B2B per la refrigerazione agroalimentare",
     excerpt:
-        "Dall’esperienza diretta nella refrigerazione industriale alla creazione di una piattaforma B2B per rendere accessibile la capacità frigorifera.",
+      "Dall’esperienza diretta nella refrigerazione industriale alla creazione di una piattaforma B2B per rendere accessibile la capacità frigorifera.",
     meta: "5 min • Piattaforma digitale B2B",
     image: coldsharinglogo,
   },
-    {
-  url: "/blog/come-si-realizzano-le-celle-frigorifere",
-  title: "Come si realizzano le celle frigorifere: guida pratica (progettazione, pannelli, impianto, collaudo)",
-  excerpt:
-    "Dalla progettazione all’isolamento, dall’impianto frigorifero al collaudo: fasi, scelte tecniche e errori da evitare. Con CTA per richiedere un preventivo a Refrom Italia.",
-  meta: "8 min • Refrigerazione industriale",
-  image: refromCover,
+  {
+    url: "/blog/come-si-realizzano-le-celle-frigorifere",
+    title:
+      "Come si realizzano le celle frigorifere: guida pratica (progettazione, pannelli, impianto, collaudo)",
+    excerpt:
+      "Dalla progettazione all’isolamento, dall’impianto frigorifero al collaudo: fasi, scelte tecniche e errori da evitare. Con CTA per richiedere un preventivo a Refrom Italia.",
+    meta: "8 min • Refrigerazione industriale",
+    image: refromCover,
   },
-
 ];
-
 
 export default function Blog() {
   useEffect(() => {
@@ -50,8 +48,11 @@ export default function Blog() {
       <Navbar />
 
       <main>
-        {/* ================= HERO (DARK IDENTICO LANDING) ================= */}
-        <section className="section" style={{ paddingTop: 24 }}>
+        {/* ================= HERO ================= */}
+        <section
+          className="section"
+          style={{ paddingTop: 24, backgroundColor: "#ffffff" }}
+        >
           <div className="container">
             <div className="frame">
               <div className="hero">
@@ -60,32 +61,34 @@ export default function Blog() {
                     Marvincla • Blog
                   </p>
 
-                  <h1 className="h1">
+                  <h1 className="h1" style={{ color: "rgba(0, 0, 0, 0.92)" }}>
                     Articoli e approfondimenti
                     <br />
-                    <span className="accent">per la filiera agroalimentare.</span>
+                    <span className="accent">
+                      per la filiera agroalimentare.
+                    </span>
                   </h1>
 
-                  <p className="lead">
-                    Contenuti brevi e operativi su digitalizzazione, siti web, e-commerce B2B, dati e processi.
+                  <p className="lead" style={{ color: "rgba(0, 0, 0, 0.72)" }}>
+                    Contenuti brevi e operativi su digitalizzazione, siti web,
+                    e-commerce B2B, dati e processi.
                   </p>
 
                   <div className="heroCtas">
                     <a className="btn btnPrimary" href="/#contatti">
                       Proponi un tema
                     </a>
-                    <a className="btn btnGhost" href="/digitalizzazione-agroalimentare">
+                    <a
+                      className="btn btnGhost"
+                      href="/digitalizzazione-agroalimentare"
+                    >
                       Vedi le soluzioni
                     </a>
                   </div>
 
-                  <p className="p" style={{ marginTop: 14, color: "rgba(255,255,255,.62)" }}>
+                  <p className="p" style={{ marginTop: 14 }}>
                     Scorri: articoli e risorse.
                   </p>
-                </div>
-
-                <div className="heroRight">
-                  <img className="heroImage" src={homeImg} alt="Blog Marvincla" loading="eager" />
                 </div>
               </div>
             </div>
@@ -102,8 +105,9 @@ export default function Blog() {
                     Articoli <span style={styles.accent}>operativi</span>
                   </h2>
                   <p style={styles.lead}>
-                    Una selezione di contenuti pensati per aziende agroalimentari: visibilità, conversione, processi,
-                    strumenti e casi reali.
+                    Una selezione di contenuti pensati per aziende
+                    agroalimentari: visibilità, conversione, processi, strumenti
+                    e casi reali.
                   </p>
                 </div>
 
@@ -121,12 +125,19 @@ export default function Blog() {
             <div className="container">
               <div style={{ ...styles.lightFrame, textAlign: "center" }}>
                 <h2 style={{ ...styles.h2, margin: "0 auto" }}>
-                  Vuoi che parliamo di te, di un progetto o di un argomento che merita di
+                  Vuoi che parliamo di te, di un progetto o di un argomento che
+                  merita di
                   <br />
                   <span style={styles.accent}>essere approfondito?</span>
                 </h2>
 
-                <p style={{ ...styles.lead, margin: "10px auto 0", maxWidth: 820 }}>
+                <p
+                  style={{
+                    ...styles.lead,
+                    margin: "10px auto 0",
+                    maxWidth: 820,
+                  }}
+                >
                   Scrivici e valutiamo se raccontarlo nel nostro blog.
                 </p>
 
@@ -134,7 +145,10 @@ export default function Blog() {
                   <a className="btn btnPrimary" href="/contatti">
                     Contattaci
                   </a>
-                  <a className="btn btnPrimary" href="/digitalizzazione-agroalimentare">
+                  <a
+                    className="btn btnPrimary"
+                    href="/digitalizzazione-agroalimentare"
+                  >
                     Soluzioni digitali
                   </a>
                 </div>
@@ -151,7 +165,11 @@ export default function Blog() {
 
 function ArticleCard({ post }) {
   return (
-    <Link to={post.url} style={styles.cardLink} aria-label={`Leggi: ${post.title}`}>
+    <Link
+      to={post.url}
+      style={styles.cardLink}
+      aria-label={`Leggi: ${post.title}`}
+    >
       <article style={styles.articleCard}>
         <div style={styles.articleMedia}>
           <img
@@ -161,9 +179,7 @@ function ArticleCard({ post }) {
             loading="lazy"
           />
 
-          {post.tag && (
-            <div style={styles.mediaBadge}>{post.tag}</div>
-          )}
+          {post.tag && <div style={styles.mediaBadge}>{post.tag}</div>}
         </div>
 
         <div style={styles.articleBody}>
@@ -196,9 +212,10 @@ const styles = {
     lineHeight: 1.1,
     letterSpacing: "-0.6px",
     fontWeight: 900,
+    color: "rgba(0, 0, 0, 0.92)",
   },
 
-  accent: { color: "#2F7D32" },
+  accent: { color: "#ff8a00" },
 
   lead: {
     marginTop: 10,

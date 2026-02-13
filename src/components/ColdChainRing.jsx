@@ -83,7 +83,7 @@ export default function ColdChainRing({
           obs.disconnect();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     obs.observe(el);
@@ -138,7 +138,13 @@ export default function ColdChainRing({
   const progressAngle = (active + 1) * segDeg;
   const progressStart = startOffsetDeg + gapDeg * 0.5;
   const progressEnd = startOffsetDeg + progressAngle - gapDeg * 0.5;
-  const progressPath = describeArc(cx, cy, progressR, progressStart, progressEnd);
+  const progressPath = describeArc(
+    cx,
+    cy,
+    progressR,
+    progressStart,
+    progressEnd,
+  );
 
   // dash length approx
   const circ = 2 * Math.PI * progressR;
@@ -191,7 +197,7 @@ export default function ColdChainRing({
           cy={cy}
           r={progressR}
           fill="none"
-          stroke="rgba(255,255,255,.10)"
+          stroke="rgba(0,0,0,.10)"
           strokeWidth={ringStroke}
           pointerEvents="none"
         />
@@ -224,13 +230,11 @@ export default function ColdChainRing({
 
           const path = donutSegmentPath(cx, cy, innerR, outerR, a0, a1);
 
-          const baseFill = "rgba(255,255,255,.06)";
-          const doneFill = "rgba(255,255,255,.10)";
+          const baseFill = "rgba(0,0,0,.04)";
+          const doneFill = "rgba(0,0,0,.08)";
           const fill = isDone ? doneFill : baseFill;
 
-          // Keep rotation as requested
-          const rotateDeg = isHover ? 8 : 0;
-          const transform = rotateDeg ? `rotate(${rotateDeg} ${cx} ${cy})` : undefined;
+          const transform = undefined;
 
           // icon placement: center of the segment
           const midA = (a0 + a1) / 2;
@@ -274,22 +278,25 @@ export default function ColdChainRing({
                 d={path}
                 fill={fill}
                 stroke={
-                  isActive || isHover ? "rgba(255,255,255,.22)" : "rgba(255,255,255,.10)"
+                  isActive || isHover ? "rgba(0,0,0,.22)" : "rgba(0,0,0,.10)"
                 }
                 strokeWidth={1.2}
                 filter={isActive || isHover ? "url(#ccrGlow)" : undefined}
               />
 
               {/* icon ONLY (no label on ring) */}
-              <g transform={`translate(${mid.x - 14}, ${mid.y - 14})`} pointerEvents="none">
+              <g
+                transform={`translate(${mid.x - 14}, ${mid.y - 14})`}
+                pointerEvents="none"
+              >
                 <Icon
                   size={28}
                   color={
                     isActive || isHover
                       ? "var(--lemon)"
                       : isDone
-                      ? "rgba(255,255,255,.86)"
-                      : "rgba(255,255,255,.62)"
+                        ? "rgba(0,0,0,.86)"
+                        : "rgba(0,0,0,.62)"
                   }
                 />
               </g>
@@ -303,8 +310,8 @@ export default function ColdChainRing({
             cx={cx}
             cy={cy}
             r={innerR - size * 0.035}
-            fill="rgba(11,11,12,.70)"
-            stroke="rgba(255,255,255,.10)"
+            fill="rgba(255,255,255,.95)"
+            stroke="rgba(0,0,0,.10)"
             strokeWidth="1"
           />
 
@@ -314,7 +321,7 @@ export default function ColdChainRing({
             textAnchor="middle"
             fontSize={Math.max(14, Math.round(size * 0.05))}
             fontWeight="950"
-            fill="rgba(255,255,255,.92)"
+            fill="rgba(0,0,0,.92)"
             style={{ letterSpacing: "-0.8px" }}
           >
             {current.title}
@@ -327,7 +334,7 @@ export default function ColdChainRing({
               y={cy + 6 + idx * 18}
               textAnchor="middle"
               fontSize={Math.max(11, Math.round(size * 0.026))}
-              fill="rgba(255,255,255,.72)"
+              fill="rgba(0,0,0,.72)"
               style={{ letterSpacing: "-0.2px" }}
             >
               {line}
@@ -339,7 +346,7 @@ export default function ColdChainRing({
             y={cy + 62}
             textAnchor="middle"
             fontSize={Math.max(10, Math.round(size * 0.022))}
-            fill="rgba(255,255,255,.55)"
+            fill="rgba(0,0,0,.55)"
           >
             Passa il mouse • Clicca per avanzare
           </text>
@@ -379,9 +386,19 @@ function describeArc(cx, cy, r, startAngle, endAngle) {
   const start = polarToCartesian(cx, cy, r, endAngle);
   const end = polarToCartesian(cx, cy, r, startAngle);
   const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-  return ["M", start.x, start.y, "A", r, r, 0, largeArcFlag, 0, end.x, end.y].join(
-    " "
-  );
+  return [
+    "M",
+    start.x,
+    start.y,
+    "A",
+    r,
+    r,
+    0,
+    largeArcFlag,
+    0,
+    end.x,
+    end.y,
+  ].join(" ");
 }
 
 function donutSegmentPath(cx, cy, rInner, rOuter, startAngle, endAngle) {
@@ -480,7 +497,12 @@ function IconCold({ size = 24, color = "currentColor" }) {
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path d="M12 11v10" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M12 11v10"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
       <path
         d="M12 2v6M9.5 4.5l5 3M14.5 4.5l-5 3"
         stroke={color}
@@ -506,7 +528,12 @@ function IconBoxes({ size = 24, color = "currentColor" }) {
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path d="M12 12v8" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M12 12v8"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -551,8 +578,18 @@ function IconMarket({ size = 24, color = "currentColor" }) {
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path d="M12 11v10" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M8.5 14.2h7" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M12 11v10"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M8.5 14.2h7"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

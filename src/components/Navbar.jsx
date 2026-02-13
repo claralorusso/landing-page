@@ -39,7 +39,10 @@ const LANDING_NAV = [
 ];
 
 const PAGES_NAV = [
-  { to: "/digitalizzazione-agroalimentare", label: "Soluzioni digitali per aziende agroalimentari" },
+  {
+    to: "/digitalizzazione-agroalimentare",
+    label: "Soluzioni digitali per aziende agroalimentari",
+  },
   { to: "/coldsharing/perche-e-nata", label: "Perché è nata ColdSharing" },
   { to: "/blog", label: "Blog" },
   { to: "/contatti", label: "Contatti" },
@@ -60,19 +63,31 @@ export default function Navbar() {
   function scrollToId(id) {
     const el = document.getElementById(id);
     if (!el) return false;
-    const yOffset = -72;
-    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({ top: y, behavior: "smooth" });
+
+    // Usa scrollIntoView invece di window.scrollTo
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Aggiusta l'offset della navbar dopo lo scroll
+    setTimeout(() => {
+      const yOffset = -80;
+      const y = window.scrollY + yOffset;
+      window.scrollTo({ top: y, behavior: "auto" });
+    }, 100);
+
     return true;
   }
 
   function goSection(id) {
-    onClose();
     if (location.pathname === "/") {
       scrollToId(id);
+      // Chiudi il drawer DOPO lo scroll
+      setTimeout(() => {
+        onClose();
+      }, 300);
       return;
     }
     navigate(`/#${id}`);
+    onClose();
   }
 
   function goPage(to) {
@@ -169,13 +184,13 @@ export default function Navbar() {
       {/* DRAWER MENU */}
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-          <DrawerContent
-            bg={COLORS.bgDark}
-            color={COLORS.text}
-            w={{ base: "86vw", sm: "360px" }}
-            maxW="70vw"
-            overflowX="hidden"
-          >
+        <DrawerContent
+          bg={COLORS.bgDark}
+          color={COLORS.text}
+          w={{ base: "92vw", sm: "33vw" }}
+          maxW={{ base: "92vw", sm: "33vw" }}
+          overflowX="hidden"
+        >
           <DrawerHeader borderBottomWidth="1px" borderColor={COLORS.border}>
             <HStack spacing={3}>
               <Box
@@ -184,7 +199,7 @@ export default function Navbar() {
                 borderRadius="999px"
                 bg="rgba(255,255,255,0.08)"
                 border="1px solid rgba(255,255,255,0.12)"
-                display="grid"
+                display={{ base: "grid", sm: "none" }}
                 placeItems="center"
                 overflow="hidden"
               >
@@ -232,7 +247,12 @@ export default function Navbar() {
               </VStack>
 
               {/* Pagine */}
-              <Text fontSize="sm" color={COLORS.muted} fontWeight="800" letterSpacing="0.4px">
+              <Text
+                fontSize="sm"
+                color={COLORS.muted}
+                fontWeight="800"
+                letterSpacing="0.4px"
+              >
                 PAGINE
               </Text>
 
@@ -277,7 +297,8 @@ export default function Navbar() {
                 Parliamone
               </Button>
               <Text color="rgba(255,255,255,0.55)" fontSize="xs" pt={2}>
-                Suggerimento: usa “Pagine” per approfondimenti, “Sezioni” per tornare alla landing.
+                Suggerimento: usa “Pagine” per approfondimenti, “Sezioni” per
+                tornare alla landing.
               </Text>
             </VStack>
           </DrawerBody>

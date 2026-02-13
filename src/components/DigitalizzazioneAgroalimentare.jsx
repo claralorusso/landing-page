@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-// stessa immagine della landing (puoi cambiarla)
-import homeImg from "../assets/home2.png";
-
 export default function DigitalizzazioneAgroalimentare() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    document.title = "Soluzioni digitali per aziende agroalimentari | Marvincla";
+    document.title =
+      "Soluzioni digitali per aziende agroalimentari | Marvincla";
   }, []);
 
   return (
@@ -16,25 +14,32 @@ export default function DigitalizzazioneAgroalimentare() {
       <Navbar />
 
       <main>
-        {/* ================= HERO (DARK IDENTICO LANDING) ================= */}
-        <section className="section" style={{ paddingTop: 24 }}>
+        {/* ================= HERO ================= */}
+        <section
+          className="section"
+          style={{ paddingTop: 24, backgroundColor: "#ffffff" }}
+        >
           <div className="container">
             <div className="frame">
               <div className="hero">
                 <div className="heroLeft">
                   <p className="p editorialBadge" style={{ marginBottom: 14 }}>
-                    Marvincla SRL • Soluzioni digitali per aziende agroalimentari
+                    Marvincla SRL • Soluzioni digitali per aziende
+                    agroalimentari
                   </p>
 
-                  <h1 className="h1">
+                  <h1 className="h1" style={{ color: "rgba(0, 0, 0, 0.92)" }}>
                     Digitalizzazione che porta
                     <br />
-                    <span className="accent">contatti, ordini e controllo.</span>
+                    <span className="accent">
+                      contatti, ordini e controllo.
+                    </span>
                   </h1>
 
-                  <p className="lead">
-                    Siti web, e-commerce B2B, dati e processi: soluzioni progettate per la filiera agroalimentare.
-                    Un unico metodo, risultati misurabili.
+                  <p className="lead" style={{ color: "rgba(0, 0, 0, 0.72)" }}>
+                    Siti web, e-commerce B2B, dati e processi: soluzioni
+                    progettate per la filiera agroalimentare. Un unico metodo,
+                    risultati misurabili.
                   </p>
 
                   <div className="heroCtas">
@@ -42,15 +47,6 @@ export default function DigitalizzazioneAgroalimentare() {
                       Richiedi una valutazione
                     </a>
                   </div>
-                </div>
-
-                <div className="heroRight">
-                  <img
-                    className="heroImage"
-                    src={homeImg}
-                    alt="Soluzioni digitali per aziende agroalimentari"
-                    loading="eager"
-                  />
                 </div>
               </div>
             </div>
@@ -68,25 +64,30 @@ export default function DigitalizzazioneAgroalimentare() {
                     Cosa facciamo <span style={styles.accent}>davvero</span>
                   </h2>
                   <p style={styles.lead}>
-                    Non “un sito”. Non “una campagna”. Ma un sistema semplice che porta traffico qualificato, lo converte
-                    e ti fa lavorare con più controllo.
+                    Non “un sito”. Non “una campagna”. Ma un sistema semplice
+                    che porta traffico qualificato, lo converte e ti fa lavorare
+                    con più controllo.
                   </p>
                 </div>
 
                 <div style={styles.grid3}>
-                  <LightCard icon="🌱" title="Siti e pagine che ti fanno trovare">
-                    Struttura SEO, contenuti e pagine per intercettare aziende della filiera agroalimentare che cercano
-                    esattamente quello che fai.
+                  <LightCard
+                    icon="🌱"
+                    title="Siti e pagine che ti fanno trovare"
+                  >
+                    Struttura SEO, contenuti e pagine per intercettare aziende
+                    della filiera agroalimentare che cercano esattamente quello
+                    che fai.
                   </LightCard>
 
                   <LightCard icon="🛒" title="E-commerce B2B (e B2C se serve)">
-                    Catalogo, richieste, listini, ordini, pagamenti e workflow: l’e-commerce diventa operativo, non
-                    “vetrina”.
+                    Catalogo, richieste, listini, ordini, pagamenti e workflow:
+                    l’e-commerce diventa operativo, non “vetrina”.
                   </LightCard>
 
                   <LightCard icon="📊" title="Dati, report e processi">
-                    Dashboard e strumenti per misurare: contatti, ordini, margini, stagionalità. Decidi con numeri, non
-                    a sensazione.
+                    Dashboard e strumenti per misurare: contatti, ordini,
+                    margini, stagionalità. Decidi con numeri, non a sensazione.
                   </LightCard>
                 </div>
 
@@ -94,7 +95,10 @@ export default function DigitalizzazioneAgroalimentare() {
                   <a className="btn btnPrimary" href="/contatti">
                     Parliamone
                   </a>
-                  <a className="btn btnPrimary" href="/coldsharing/perche-e-nata">
+                  <a
+                    className="btn btnPrimary"
+                    href="/coldsharing/perche-e-nata"
+                  >
                     Perché è nata ColdSharing
                   </a>
                 </div>
@@ -108,21 +112,25 @@ export default function DigitalizzazioneAgroalimentare() {
               <div style={styles.lightFrame}>
                 <h2 style={styles.h2}>Il metodo (3 fasi)</h2>
                 <p style={styles.lead}>
-                  Un percorso chiaro, per non perdere tempo: prima rendiamo il prodotto “trovabile”, poi lo rendiamo
-                  “vendibile”, infine lo facciamo crescere con investimenti misurabili.
+                  Un percorso chiaro, per non perdere tempo: prima rendiamo il
+                  prodotto “trovabile”, poi lo rendiamo “vendibile”, infine lo
+                  facciamo crescere con investimenti misurabili.
                 </p>
 
                 <div style={styles.grid3}>
                   <StepCard step="Fase 1" icon="🧭" title="Raccontare">
-                    Sito/landing, messaggio, SEO e contenuti: chiarire cosa fai e per chi, per farti trovare e capire.
+                    Sito/landing, messaggio, SEO e contenuti: chiarire cosa fai
+                    e per chi, per farti trovare e capire.
                   </StepCard>
 
                   <StepCard step="Fase 2" icon="⚙️" title="Vendere">
-                    E-commerce B2B, richieste, listini, ordini e strumenti: far scorrere il processo commerciale.
+                    E-commerce B2B, richieste, listini, ordini e strumenti: far
+                    scorrere il processo commerciale.
                   </StepCard>
 
                   <StepCard step="Fase 3" icon="📣" title="Crescere">
-                    Campagne e reporting: portare il prodotto davanti alle persone giuste, con numeri chiari.
+                    Campagne e reporting: portare il prodotto davanti alle
+                    persone giuste, con numeri chiari.
                   </StepCard>
                 </div>
               </div>
@@ -135,7 +143,8 @@ export default function DigitalizzazioneAgroalimentare() {
               <div style={styles.lightFrame}>
                 <h2 style={styles.h2}>Alcuni dei nostri progetti</h2>
                 <p style={styles.lead}>
-                  Prodotti e piattaforme nate da problemi reali. Qui due esempi concreti.
+                  Prodotti e piattaforme nate da problemi reali. Qui due esempi
+                  concreti.
                 </p>
 
                 <div
@@ -144,20 +153,30 @@ export default function DigitalizzazioneAgroalimentare() {
                     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                     gap: 14,
                     marginTop: 18,
-                  }}>
+                  }}
+                >
                   <ProjectCard
                     tag="Piattaforma • Filiera del freddo"
                     title="ColdSharing"
                     desc="Marketplace B2B per trovare e valorizzare capacità refrigerata disponibile."
-                    cta1={{ label: "Apri ColdSharing", href: "https://cellefrigo.net" }}
-                    cta2={{ label: "Perché è nata", href: "/coldsharing/perche-e-nata" }}
+                    cta1={{
+                      label: "Apri ColdSharing",
+                      href: "https://cellefrigo.net",
+                    }}
+                    cta2={{
+                      label: "Perché è nata",
+                      href: "/coldsharing/perche-e-nata",
+                    }}
                   />
 
                   <ProjectCard
                     tag="Progetto • Industria / Soluzioni"
                     title="Nitra System"
                     desc="Progetto digitale e presenza online per un brand tecnico e industriale."
-                    cta1={{ label: "Visita Nitra System", href: "https://www.nitrasystem.com" }}
+                    cta1={{
+                      label: "Visita Nitra System",
+                      href: "https://www.nitrasystem.com",
+                    }}
                     cta2={{ label: "Parliamone", href: "/contatti" }}
                   />
                 </div>
@@ -170,13 +189,21 @@ export default function DigitalizzazioneAgroalimentare() {
             <div className="container">
               <div style={{ ...styles.lightFrame, textAlign: "center" }}>
                 <h2 style={{ ...styles.h2, margin: "0 auto" }}>
-                  Hai una idea e non sai come 
+                  Hai una idea e non sai come
                   <br />
                   <span style={styles.accent}>svilupparla?</span>
                 </h2>
 
-                <p style={{ ...styles.lead, margin: "10px auto 0", maxWidth: 820 }}>
-                  Marvincla ti aiuta in ogni fase progettuale. Ti mandiamo un primo feedback operativo: priorità, canali e cosa conviene costruire adesso.
+                <p
+                  style={{
+                    ...styles.lead,
+                    margin: "10px auto 0",
+                    maxWidth: 820,
+                  }}
+                >
+                  Marvincla ti aiuta in ogni fase progettuale. Ti mandiamo un
+                  primo feedback operativo: priorità, canali e cosa conviene
+                  costruire adesso.
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>
@@ -212,7 +239,14 @@ function LightCard({ icon, title, children }) {
 function StepCard({ step, icon, title, children }) {
   return (
     <div style={{ ...styles.card, background: "rgba(15,17,20,.02)" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 10,
+          alignItems: "center",
+        }}
+      >
         <div style={styles.stepPill}>{step}</div>
         <div style={styles.cardIcon}>{icon}</div>
       </div>
@@ -230,7 +264,12 @@ function ProjectCard({ tag, title, desc, cta1, cta2 }) {
       <div style={styles.cardDesc}>{desc}</div>
 
       <div style={styles.projectCtas}>
-        <a className="btn btnPrimary" href={cta1.href} target={cta1.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+        <a
+          className="btn btnPrimary"
+          href={cta1.href}
+          target={cta1.href.startsWith("http") ? "_blank" : undefined}
+          rel="noreferrer"
+        >
           {cta1.label}
         </a>
         <a className="btn btnPrimary" href={cta2.href}>
@@ -267,10 +306,11 @@ const styles = {
     lineHeight: 1.1,
     letterSpacing: "-0.6px",
     fontWeight: 900,
+    color: "rgba(0, 0, 0, 0.92)",
   },
 
   accent: {
-    color: "#2F7D32",
+    color: "#ff8a00",
   },
 
   lead: {
@@ -364,6 +404,7 @@ const styles = {
     fontSize: 18,
     letterSpacing: "-0.3px",
     marginBottom: 8,
+    color: "rgba(0, 0, 0, 0.92)",
   },
 
   projectCtas: {

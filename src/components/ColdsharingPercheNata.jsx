@@ -10,7 +10,6 @@ import ideaImg from "../assets/fotoperchenata.png";
 // ✅ immagine per sessione "5 MOTIVI"
 import previewImg from "../assets/coldsharinglogo.png";
 
-
 export default function ColdsharingPercheNata() {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -22,29 +21,42 @@ export default function ColdsharingPercheNata() {
       <Navbar />
 
       <main>
-        {/* ================= HERO (DARK IDENTICO LANDING) ================= */}
-        <section className="section" style={{ paddingTop: 24 }}>
+        {/* ================= HERO ================= */}
+        <section
+          className="section"
+          style={{ paddingTop: 24, backgroundColor: "#ffffff" }}
+        >
           <div className="container">
             <div className="frame">
               <div className="hero">
                 <div className="heroLeft">
-                  <p className="p editorialBadge" style={{ marginBottom: 14 }}>
+                  <p
+                    className="p editorialBadge"
+                    style={{ marginBottom: 14, color: "rgba(0, 0, 0, 0.92)" }}
+                  >
                     ColdSharing • Perché è nata
                   </p>
 
-                  <h1 className="h1">
+                  <h1 className="h1" style={{ color: "rgba(0, 0, 0, 0.92)" }}>
                     Il freddo è un costo.
                     <br />
                     <span className="accent">Condividilo!</span>
                   </h1>
 
-                  <p className="lead">
-                    ColdSharing nasce per rendere più semplice e trasparente l’accesso alla capacità refrigerata
-                    esistente: meno telefonate, meno incertezza, più efficienza operativa nella filiera agroalimentare.
+                  <p className="lead" style={{ color: "rgba(0, 0, 0, 0.72)" }}>
+                    ColdSharing nasce per rendere più semplice e trasparente
+                    l’accesso alla capacità refrigerata esistente: meno
+                    telefonate, meno incertezza, più efficienza operativa nella
+                    filiera agroalimentare.
                   </p>
 
                   <div className="heroCtas">
-                    <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                    <a
+                      className="btn btnPrimary"
+                      href="https://cellefrigo.net"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Apri ColdSharing
                     </a>
 
@@ -53,13 +65,22 @@ export default function ColdsharingPercheNata() {
                     </a>
                   </div>
 
-                  <p className="p" style={{ marginTop: 14, color: "rgba(255,255,255,.62)" }}>
-                    Questa pagina è un approfondimento: sotto trovi problemi reali, paradosso del mercato e benefici.
+                  <p
+                    className="p"
+                    style={{ marginTop: 14, color: "rgba(0, 0, 0, 0.62)" }}
+                  >
+                    Questa pagina è un approfondimento: sotto trovi problemi
+                    reali, paradosso del mercato e benefici.
                   </p>
                 </div>
 
                 <div className="heroRight">
-                  <img className="heroImage" src={homeImg} alt="ColdSharing — perché è nata" loading="eager" />
+                  <img
+                    className="heroImage"
+                    src={homeImg}
+                    alt="ColdSharing — perché è nata"
+                    loading="eager"
+                  />
                 </div>
               </div>
             </div>
@@ -74,33 +95,48 @@ export default function ColdsharingPercheNata() {
               <div style={styles.lightFrame}>
                 <div style={{ maxWidth: 880 }}>
                   <h2 style={styles.h2}>
-                    I problemi che abbiamo visto <span style={styles.accent}>sul campo</span>
+                    I problemi che abbiamo visto{" "}
+                    <span style={styles.accent}>sul campo</span>
                   </h2>
                   <p style={styles.lead}>
-                    Il freddo non è “un dettaglio logistico”: è una risorsa critica. Eppure spesso è gestita con processi
-                    frammentati e poco misurabili.
+                    Il freddo non è “un dettaglio logistico”: è una risorsa
+                    critica. Eppure spesso è gestita con processi frammentati e
+                    poco misurabili.
                   </p>
                 </div>
 
                 <div style={styles.grid3}>
                   <LightCard icon="📞" title="Ricerca lenta e frammentata">
-                    Disponibilità e condizioni non sono chiare: si procede per telefonate e passaparola.
+                    Disponibilità e condizioni non sono chiare: si procede per
+                    telefonate e passaparola.
                   </LightCard>
-                  <LightCard icon="🧊" title="Capacità esistente sottoutilizzata">
-                    Spazi refrigerati disponibili restano vuoti o non valorizzati perché difficili da “mettere a
-                    mercato”.
+                  <LightCard
+                    icon="🧊"
+                    title="Capacità esistente sottoutilizzata"
+                  >
+                    Spazi refrigerati disponibili restano vuoti o non
+                    valorizzati perché difficili da “mettere a mercato”.
                   </LightCard>
                   <LightCard icon="💸" title="Costi e investimenti alti">
-                    Costruire o gestire freddo richiede capex e costi operativi spesso non sostenibili per tutti.
+                    Costruire o gestire freddo richiede capex e costi operativi
+                    spesso non sostenibili per tutti.
                   </LightCard>
                 </div>
 
                 <div style={{ ...styles.grid3, marginTop: 14 }}>
-                  <LightCard icon="📉" title="Bassa digitalizzazione e poca misurabilità">
-                    Dati dispersi, report assenti, processi manuali: si decide senza indicatori operativi chiari.
+                  <LightCard
+                    icon="📉"
+                    title="Bassa digitalizzazione e poca misurabilità"
+                  >
+                    Dati dispersi, report assenti, processi manuali: si decide
+                    senza indicatori operativi chiari.
                   </LightCard>
-                  <LightCard icon="🤝" title="Domanda e offerta non si incontrano">
-                    Chi cerca freddo e chi lo offre non ha un canale unico e trasparente per connettersi velocemente.
+                  <LightCard
+                    icon="🤝"
+                    title="Domanda e offerta non si incontrano"
+                  >
+                    Chi cerca freddo e chi lo offre non ha un canale unico e
+                    trasparente per connettersi velocemente.
                   </LightCard>
                   <div />
                 </div>
@@ -116,13 +152,15 @@ export default function ColdsharingPercheNata() {
                   <div style={styles.kicker}>PARADOSSO DEL MERCATO</div>
 
                   <h2 style={styles.h2}>
-                    Refrigerazione <span style={styles.accent}>ancora limitata</span>.
+                    Refrigerazione{" "}
+                    <span style={styles.accent}>ancora limitata</span>.
                   </h2>
 
                   <p style={styles.lead}>
-                    La slide evidenzia un punto chiave: il valore del mercato cresce, ma la catena del freddo non scala
-                    allo stesso ritmo. Il motivo principale è il costo: infrastrutture e gestione non sono accessibili in
-                    modo semplice e capillare.
+                    La slide evidenzia un punto chiave: il valore del mercato
+                    cresce, ma la catena del freddo non scala allo stesso ritmo.
+                    Il motivo principale è il costo: infrastrutture e gestione
+                    non sono accessibili in modo semplice e capillare.
                   </p>
                 </div>
                 <div
@@ -132,11 +170,20 @@ export default function ColdsharingPercheNata() {
                     gap: 16,
                     marginTop: 18,
                     alignItems: "start",
-                  }}>
+                  }}
+                >
                   <div style={styles.bigBox}>
                     <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                      <MiniKpi label="ITALIA" value="13 Billioni di Euro" sub="entro 2026" />
-                      <MiniKpi label="MONDO" value="330 Billioni di Euro" sub="entro 2030" />
+                      <MiniKpi
+                        label="ITALIA"
+                        value="13 Billioni di Euro"
+                        sub="entro 2026"
+                      />
+                      <MiniKpi
+                        label="MONDO"
+                        value="330 Billioni di Euro"
+                        sub="entro 2030"
+                      />
                     </div>
                   </div>
 
@@ -144,21 +191,27 @@ export default function ColdsharingPercheNata() {
                     <div style={styles.paradoxLabel}>Il punto critico</div>
                     <div style={styles.paradoxValue}>10%</div>
                     <p style={styles.paradoxText}>
-                      Solo una piccola parte del prodotto raccolto viene refrigerata: non per mancanza di bisogno, ma
-                      perché i costi della refrigerazione (capex + gestione) rendono l’accesso alla capacità difficile.
+                      Solo una piccola parte del prodotto raccolto viene
+                      refrigerata: non per mancanza di bisogno, ma perché i
+                      costi della refrigerazione (capex + gestione) rendono
+                      l’accesso alla capacità difficile.
                     </p>
 
                     <div style={styles.paradoxGrid}>
                       <div style={styles.paradoxMini}>
                         <div style={styles.paradoxMiniT}>Cosa serve</div>
                         <div style={styles.paradoxMiniD}>
-                          Rendere la capacità esistente più accessibile, trasparente e misurabile.
+                          Rendere la capacità esistente più accessibile,
+                          trasparente e misurabile.
                         </div>
                       </div>
                       <div style={styles.paradoxMini}>
-                        <div style={styles.paradoxMiniT}>Cosa fa ColdSharing</div>
+                        <div style={styles.paradoxMiniT}>
+                          Cosa fa ColdSharing
+                        </div>
                         <div style={styles.paradoxMiniD}>
-                          Connette domanda↔offerta e riduce tempo e costo di ricerca.
+                          Connette domanda↔offerta e riduce tempo e costo di
+                          ricerca.
                         </div>
                       </div>
                     </div>
@@ -166,7 +219,12 @@ export default function ColdsharingPercheNata() {
                 </div>
 
                 <div style={styles.ctaRow}>
-                  <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                  <a
+                    className="btn btnPrimary"
+                    href="https://cellefrigo.net"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Vedi la piattaforma
                   </a>
                   <a className="btn btnPrimary" href="/contatti">
@@ -181,7 +239,14 @@ export default function ColdsharingPercheNata() {
           <section style={styles.lightSection}>
             <div className="container">
               <div style={styles.lightFrame}>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 18, alignItems: "center" }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                    gap: 18,
+                    alignItems: "center",
+                  }}
+                >
                   {/* Visual */}
                   <div style={styles.ideaIconWrap} aria-hidden="true">
                     {/* ✅ MODIFICA: immagine al posto della lampadina */}
@@ -200,12 +265,15 @@ export default function ColdsharingPercheNata() {
                     <h2 style={{ ...styles.h2, marginTop: 12 }}>
                       ColdSharing
                       <br />
-                      <span style={styles.accent2}>Marketplace B2B</span> per la condivisione del tuo locale refrigerato
+                      <span style={styles.accent2}>Marketplace B2B</span> per la
+                      condivisione del tuo locale refrigerato
                     </h2>
 
                     <p style={styles.lead}>
-                      Mettiamo in contatto chi ha <b>capacità frigorifera</b> con chi ne ha bisogno in pochi minuti:
-                      <b> ricerca geolocalizzata</b>, <b>prenotazioni sicure</b> e <b>tracciabilità completa</b>.
+                      Mettiamo in contatto chi ha <b>capacità frigorifera</b>{" "}
+                      con chi ne ha bisogno in pochi minuti:
+                      <b> ricerca geolocalizzata</b>, <b>prenotazioni sicure</b>{" "}
+                      e <b>tracciabilità completa</b>.
                     </p>
 
                     <div style={styles.ideaPoints}>
@@ -214,7 +282,8 @@ export default function ColdsharingPercheNata() {
                         <div>
                           <div style={styles.ideaT}>Ricerca geolocalizzata</div>
                           <div style={styles.ideaD}>
-                            Trova celle frigo e magazzini refrigerati per zona, temperatura e capienza.
+                            Trova celle frigo e magazzini refrigerati per zona,
+                            temperatura e capienza.
                           </div>
                         </div>
                       </div>
@@ -224,7 +293,8 @@ export default function ColdsharingPercheNata() {
                         <div>
                           <div style={styles.ideaT}>Prenotazioni sicure</div>
                           <div style={styles.ideaD}>
-                            Gestione digitale di condizioni, disponibilità, accordi e pagamenti.
+                            Gestione digitale di condizioni, disponibilità,
+                            accordi e pagamenti.
                           </div>
                         </div>
                       </div>
@@ -234,14 +304,20 @@ export default function ColdsharingPercheNata() {
                         <div>
                           <div style={styles.ideaT}>Tracciabilità completa</div>
                           <div style={styles.ideaD}>
-                            Accessi, temperature, report e audit trail: meno rischi e più controllo.
+                            Accessi, temperature, report e audit trail: meno
+                            rischi e più controllo.
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div style={styles.ctaRow}>
-                      <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                      <a
+                        className="btn btnPrimary"
+                        href="https://cellefrigo.net"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Apri ColdSharing
                       </a>
                       <a className="btn btnPrimary" href="/contatti">
@@ -261,12 +337,16 @@ export default function ColdsharingPercheNata() {
                 <div style={{ maxWidth: 980 }}>
                   <div style={styles.kicker}>TARGET</div>
                   <h2 style={{ ...styles.h2, marginTop: 12 }}>
-                    A chi è rivolto <span style={styles.accent}>ColdSharing</span>
+                    A chi è rivolto{" "}
+                    <span style={styles.accent}>ColdSharing</span>
                   </h2>
                   <p style={styles.lead}>
-                    ColdSharing è progettato per le <b>aziende del settore agroalimentare</b> che gestiscono stoccaggio,
-                    conservazione e logistica a temperatura controllata. Due ruoli: <b>clienti</b> (cercano spazio refrigerato) e{" "}
-                    <b>fornitori</b> (hanno capacità frigorifera disponibile).
+                    ColdSharing è progettato per le{" "}
+                    <b>aziende del settore agroalimentare</b> che gestiscono
+                    stoccaggio, conservazione e logistica a temperatura
+                    controllata. Due ruoli: <b>clienti</b> (cercano spazio
+                    refrigerato) e <b>fornitori</b> (hanno capacità frigorifera
+                    disponibile).
                   </p>
                 </div>
 
@@ -278,24 +358,47 @@ export default function ColdsharingPercheNata() {
                       <div>
                         <div style={styles.targetTitle}>Clienti</div>
                         <div style={styles.targetSub}>
-                          Aziende che cercano <b>celle frigorifere</b>, <b>magazzini refrigerati</b> o{" "}
+                          Aziende che cercano <b>celle frigorifere</b>,{" "}
+                          <b>magazzini refrigerati</b> o{" "}
                           <b>deposito a temperatura controllata</b>
                         </div>
                       </div>
                     </div>
 
                     <ul style={styles.ul}>
-                      <li><b>Aziende agricole</b> e produttori (ortofrutta, uva, agrumi, IV gamma)</li>
-                      <li><b>Cooperative agricole</b> e <b>consorzi</b> di produttori</li>
-                      <li><b>Industrie alimentari</b> e trasformazione (lattiero-caseario, carne, ittico, surgelati)</li>
-                      <li><b>Grossisti agroalimentari</b>, piattaforme commerciali, cash &amp; carry</li>
-                      <li>Operatori di <b>export agroalimentare</b> e gestione picchi stagionali</li>
-                      <li><b>GDO</b> e centrali acquisto (necessità temporanee o emergenze di stoccaggio)</li>
-                      <li><b>Trasportatori refrigerati</b> e logistica del freddo (cross-dock / appoggi refrigerati)</li>
+                      <li>
+                        <b>Aziende agricole</b> e produttori (ortofrutta, uva,
+                        agrumi, IV gamma)
+                      </li>
+                      <li>
+                        <b>Cooperative agricole</b> e <b>consorzi</b> di
+                        produttori
+                      </li>
+                      <li>
+                        <b>Industrie alimentari</b> e trasformazione
+                        (lattiero-caseario, carne, ittico, surgelati)
+                      </li>
+                      <li>
+                        <b>Grossisti agroalimentari</b>, piattaforme
+                        commerciali, cash &amp; carry
+                      </li>
+                      <li>
+                        Operatori di <b>export agroalimentare</b> e gestione
+                        picchi stagionali
+                      </li>
+                      <li>
+                        <b>GDO</b> e centrali acquisto (necessità temporanee o
+                        emergenze di stoccaggio)
+                      </li>
+                      <li>
+                        <b>Trasportatori refrigerati</b> e logistica del freddo
+                        (cross-dock / appoggi refrigerati)
+                      </li>
                     </ul>
 
                     <div style={styles.targetNote}>
-                      Keyword: celle frigorifere in affitto, deposito refrigerato, magazzino frigorifero, stoccaggio a freddo.
+                      Keyword: celle frigorifere in affitto, deposito
+                      refrigerato, magazzino frigorifero, stoccaggio a freddo.
                     </div>
                   </div>
 
@@ -306,29 +409,55 @@ export default function ColdsharingPercheNata() {
                       <div>
                         <div style={styles.targetTitle}>Fornitori</div>
                         <div style={styles.targetSub}>
-                          Aziende con <b>spazio refrigerato vuoto o semivuoto</b> che vogliono valorizzare la capacità
+                          Aziende con{" "}
+                          <b>spazio refrigerato vuoto o semivuoto</b> che
+                          vogliono valorizzare la capacità
                         </div>
                       </div>
                     </div>
 
                     <ul style={styles.ul}>
-                      <li>Gestori di <b>celle frigorifere</b> e <b>magazzini a temperatura controllata</b></li>
-                      <li><b>Operatori logistici</b> (3PL) e piattaforme di logistica agroalimentare</li>
-                      <li>Centri di <b>stoccaggio ortofrutta</b>, hub ittici, depositi surgelati</li>
-                      <li><b>Trasportatori</b> con strutture di appoggio o transito refrigerato</li>
-                      <li>Aziende con <b>capienza frigorifera inutilizzata</b> (stagionalità, volumi variabili)</li>
-                      <li>Imprese che vogliono aumentare il <b>tasso di occupazione</b> e ridurre sprechi energetici</li>
+                      <li>
+                        Gestori di <b>celle frigorifere</b> e{" "}
+                        <b>magazzini a temperatura controllata</b>
+                      </li>
+                      <li>
+                        <b>Operatori logistici</b> (3PL) e piattaforme di
+                        logistica agroalimentare
+                      </li>
+                      <li>
+                        Centri di <b>stoccaggio ortofrutta</b>, hub ittici,
+                        depositi surgelati
+                      </li>
+                      <li>
+                        <b>Trasportatori</b> con strutture di appoggio o
+                        transito refrigerato
+                      </li>
+                      <li>
+                        Aziende con <b>capienza frigorifera inutilizzata</b>{" "}
+                        (stagionalità, volumi variabili)
+                      </li>
+                      <li>
+                        Imprese che vogliono aumentare il{" "}
+                        <b>tasso di occupazione</b> e ridurre sprechi energetici
+                      </li>
                     </ul>
 
                     <div style={styles.targetNote}>
-                      Keyword: capacità frigorifera disponibile, affitto cella frigo, magazzino refrigerato disponibile,
-                      outsourcing freddo.
+                      Keyword: capacità frigorifera disponibile, affitto cella
+                      frigo, magazzino refrigerato disponibile, outsourcing
+                      freddo.
                     </div>
                   </div>
                 </div>
 
                 <div style={{ ...styles.ctaRow, marginTop: 18 }}>
-                  <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                  <a
+                    className="btn btnPrimary"
+                    href="https://cellefrigo.net"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Vai alla piattaforma
                   </a>
                   <a className="btn btnPrimary" href="/contatti">
@@ -345,25 +474,37 @@ export default function ColdsharingPercheNata() {
               <div style={styles.lightFrame}>
                 <div style={{ maxWidth: 900, margin: "0 auto" }}>
                   <div style={styles.kicker}>COME FUNZIONA</div>
-                  <h2 style={{ ...styles.h2, textAlign: "center", marginTop: 12 }}>
+                  <h2
+                    style={{ ...styles.h2, textAlign: "center", marginTop: 12 }}
+                  >
                     Tre passaggi, <span style={styles.accent}>zero caos</span>
                   </h2>
-                  <p style={{ ...styles.lead, textAlign: "center", marginTop: 10 }}>
-                    Un flusso semplice per trovare disponibilità reale, prenotare in sicurezza e monitorare la gestione.
+                  <p
+                    style={{
+                      ...styles.lead,
+                      textAlign: "center",
+                      marginTop: 10,
+                    }}
+                  >
+                    Un flusso semplice per trovare disponibilità reale,
+                    prenotare in sicurezza e monitorare la gestione.
                   </p>
                 </div>
 
                 <div style={styles.grid3}>
                   <HowCard step="1. Cerca" bar="dark">
-                    Filtra per prodotto, temperatura e posizione. Vedi disponibilità reale.
+                    Filtra per prodotto, temperatura e posizione. Vedi
+                    disponibilità reale.
                   </HowCard>
 
                   <HowCard step="2. Prenota" bar="warm">
-                    Gestione digitale di prezzi, contratti e pagamenti (escrow) in sicurezza.
+                    Gestione digitale di prezzi, contratti e pagamenti (escrow)
+                    in sicurezza.
                   </HowCard>
 
                   <HowCard step="3. Refrigera" bar="light">
-                    Deposito e monitoraggio: accessi, temperature, report e audit trail.
+                    Deposito e monitoraggio: accessi, temperature, report e
+                    audit trail.
                   </HowCard>
                 </div>
               </div>
@@ -383,42 +524,53 @@ export default function ColdsharingPercheNata() {
                     gap: 18,
                     marginTop: 14,
                     alignItems: "start",
-                  }}>
+                  }}
+                >
                   <div style={{ display: "grid", gap: 12 }}>
                     <Reason icon="🔎" title="Trovi il locale adatto a te">
-                      Scegli celle frigorifere certificate vicino a te, filtrando per prodotto, temperatura e capienza.
+                      Scegli celle frigorifere certificate vicino a te,
+                      filtrando per prodotto, temperatura e capienza.
                     </Reason>
                     <Reason icon="💸" title="Nessun investimento iniziale">
-                      Usi solo lo spazio che ti serve e quando ti serve: paghi a consumo, senza costi fissi o investimenti.
+                      Usi solo lo spazio che ti serve e quando ti serve: paghi a
+                      consumo, senza costi fissi o investimenti.
                     </Reason>
                     <Reason icon="⚙️" title="Meno costi di gestione">
-                      Ottimizza la tua capacità e riduci sprechi ed energia condividendo lo spazio.
+                      Ottimizza la tua capacità e riduci sprechi ed energia
+                      condividendo lo spazio.
                     </Reason>
                     <Reason icon="♻️" title="Economia circolare">
-                      Massimizzi l’uso di infrastrutture esistenti riducendo l’impatto ambientale.
+                      Massimizzi l’uso di infrastrutture esistenti riducendo
+                      l’impatto ambientale.
                     </Reason>
                     <Reason icon="🤝" title="Networking">
-                      Connetti la tua azienda con produttori, trasportatori e operatori della filiera del freddo.
+                      Connetti la tua azienda con produttori, trasportatori e
+                      operatori della filiera del freddo.
                     </Reason>
                   </div>
 
                   <div style={styles.previewBox}>
                     <div style={styles.previewTag}>🔎 COLDSHARING</div>
                     <div style={styles.previewImg} className="hideOnMobile">
-                    <img
+                      <img
                         src={previewImg}
                         alt="Celle frigorifere disponibili su ColdSharing"
                         style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        borderRadius: 14,
-                        display: "block",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          borderRadius: 14,
+                          display: "block",
                         }}
-                    />
+                      />
                     </div>
                     <div style={styles.previewCtas}>
-                      <a className="btn btnPrimary" href="https://cellefrigo.net" target="_blank" rel="noreferrer">
+                      <a
+                        className="btn btnPrimary"
+                        href="https://cellefrigo.net"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         Vai alla piattaforma
                       </a>
                       <a className="btn btnPrimary" href="/contatti">
@@ -438,11 +590,21 @@ export default function ColdsharingPercheNata() {
                 <h2 style={{ ...styles.h2, margin: "0 auto" }}>
                   Hai in mente una tua
                   <br />
-                  <span style={styles.accent}>piattaforma digitale per la filiera agroalimentare?</span>
+                  <span style={styles.accent}>
+                    piattaforma digitale per la filiera agroalimentare?
+                  </span>
                 </h2>
 
-                <p style={{ ...styles.lead, margin: "10px auto 0", maxWidth: 820 }}>
-                  Marvincla supporta aziende e startup nella progettazione e sviluppo di piattaforme digitali B2B, dalla visione alla messa online.
+                <p
+                  style={{
+                    ...styles.lead,
+                    margin: "10px auto 0",
+                    maxWidth: 820,
+                  }}
+                >
+                  Marvincla supporta aziende e startup nella progettazione e
+                  sviluppo di piattaforme digitali B2B, dalla visione alla messa
+                  online.
                 </p>
 
                 <div style={{ ...styles.ctaRow, justifyContent: "center" }}>
@@ -491,8 +653,8 @@ function HowCard({ step, bar, children }) {
     bar === "dark"
       ? "rgba(13, 59, 74, .95)"
       : bar === "warm"
-      ? "rgba(139, 74, 61, .95)"
-      : "rgba(15,17,20,.22)"; // FIX: ora si vede sempre
+        ? "rgba(139, 74, 61, .95)"
+        : "rgba(15,17,20,.22)"; // FIX: ora si vede sempre
 
   // percentuali (solo estetica)
   const fill = bar === "dark" ? "86%" : bar === "warm" ? "78%" : "62%";
@@ -811,7 +973,8 @@ const styles = {
   previewImg: {
     height: 300,
     borderRadius: 16,
-    background: "linear-gradient(180deg, rgba(15,17,20,.06), rgba(15,17,20,.02))",
+    background:
+      "linear-gradient(180deg, rgba(15,17,20,.06), rgba(15,17,20,.02))",
     border: "1px solid rgba(15,17,20,.08)",
   },
 
@@ -879,7 +1042,12 @@ const styles = {
   },
 
   ideaT: { fontWeight: 1100, fontSize: 13.5, color: "#0F1114" },
-  ideaD: { marginTop: 3, fontSize: 13, lineHeight: 1.45, color: "rgba(15,17,20,.68)" },
+  ideaD: {
+    marginTop: 3,
+    fontSize: 13,
+    lineHeight: 1.45,
+    color: "rgba(15,17,20,.68)",
+  },
 
   targetGrid: {
     marginTop: 18,
@@ -915,7 +1083,12 @@ const styles = {
   },
 
   targetTitle: { fontWeight: 1100, fontSize: 16, letterSpacing: "-0.3px" },
-  targetSub: { marginTop: 4, fontSize: 13, lineHeight: 1.45, color: "rgba(15,17,20,.68)" },
+  targetSub: {
+    marginTop: 4,
+    fontSize: 13,
+    lineHeight: 1.45,
+    color: "rgba(15,17,20,.68)",
+  },
 
   ul: {
     margin: 0,
