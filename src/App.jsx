@@ -11,6 +11,7 @@ import BlogPost from "./components/BlogPost";
 import BlogMarvinclaOrigine from "./components/BlogMarvinclaOrigine";
 import Contatti from "./components/Contatti";
 import BlogCelleFrigorifere from "./components/BlogCelleFrigorifere";
+import Partner from "./components/Partner";
 import ScrollToTop from "./Scroll-to-top";
 
 export default function App() {
@@ -51,6 +52,9 @@ export default function App() {
 
         {/* ✅ contatti */}
         <Route path="/contatti" element={<Contatti />} />
+
+        {/* ✅ partner redirect */}
+        <Route path="/partner" element={<Partner />} />
       </Routes>
     </>
   );
