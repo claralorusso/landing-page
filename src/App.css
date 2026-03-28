@@ -4216,3 +4216,43 @@ img {
 .section .p {
   color: rgba(0, 0, 0, 0.72);
 }
+
+/* Landing hero: explicit responsive layout for the first fold */
+.homeHeroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 80px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.homeHeroGrid > * {
+  min-width: 0;
+}
+
+@media (max-width: 980px) {
+  .homeHeroGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .homeHeroVisual {
+    display: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .homeHeroGrid {
+    gap: 0;
+  }
+
+  .heroLeft .heroCtas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heroLeft .heroCtas .btn {
+    width: 100%;
+  }
+}

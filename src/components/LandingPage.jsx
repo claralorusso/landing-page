@@ -93,17 +93,7 @@ export default function LandingPage() {
             aria-hidden="true"
           />
 
-          <div
-            className="container"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 80,
-              alignItems: "start",
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
+          <div className="container homeHeroGrid">
             {/* LEFT: Testo */}
             <div className="heroLeft" style={{ maxWidth: "100%" }}>
               <p className="p editorialBadge" style={{ marginBottom: 14 }}>
@@ -152,6 +142,7 @@ export default function LandingPage() {
 
             {/* RIGHT: Visual decorativo */}
             <div
+              className="homeHeroVisual"
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -160,6 +151,7 @@ export default function LandingPage() {
               }}
             >
               <div
+                className="homeHeroCard"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -201,25 +193,13 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-
-          {/* Responsive */}
-          <style>
-            {`
-              @media (max-width: 980px) {
-                [style*="gridTemplateColumns: 1fr 1fr"] {
-                  grid-template-columns: 1fr !important;
-                  gap: 48px !important;
-                }
-              }
-            `}
-          </style>
         </section>
 
         {/* FILIERA — full-bleed */}
         <section
           id="filiera"
           className="section filieraSection"
-          style={{ backgroundColor: "#ffffff", padding: 24 }}
+          style={{ backgroundColor: "#ffffff" }}
         >
           <div
             className="container"
