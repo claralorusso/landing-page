@@ -583,6 +583,7 @@ export default function LandingPage() {
                   src="/ColdSharing_verticale.mp4"
                   autoPlay
                   loop
+                  muted
                   playsInline
                   controls
                   style={{
