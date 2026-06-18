@@ -570,112 +570,32 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* MOCKUP PHONE */}
-              <div className="projectRight">
-                <div
-                  className="handWrap"
-                  aria-label="Mockup smartphone ColdSharing"
-                >
-                  <div className="handPalm" aria-hidden="true" />
-                  <div className="handThumb" aria-hidden="true" />
-
-                  <div className="phone">
-                    <div className="phoneNotch" aria-hidden="true" />
-                    <div className="phoneScreen">
-                      <div className="csUiTop">
-                        <div className="csUiBrand">
-                          <span className="csUiLogo">❄️</span>
-                          <div>
-                            <div className="csUiName">ColdSharing</div>
-                            <div className="csUiSub">
-                              Locali refrigerati • Ricerca rapida
-                            </div>
-                          </div>
-                        </div>
-                        <div className="csUiChip">B2B</div>
-                      </div>
-
-                      <div className="csUiSearch">
-                        <div className="csUiSearchIcon">🔎</div>
-                        <div className="csUiSearchText">
-                          Cerca per città, m³, temperatura…
-                        </div>
-                      </div>
-
-                      <div className="csUiFilters">
-                        <span className="csUiPill">📍 Zona</span>
-                        <span className="csUiPill">🌡️ Temp</span>
-                        <span className="csUiPill">📦 Capienza</span>
-                        <span className="csUiPill">✅ Dispon.</span>
-                      </div>
-
-                      <div className="csUiList">
-                        <div className="csUiCard">
-                          <div className="csUiThumb" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Bari • 0–4°C</b>
-                              <span className="csUiPrice">50 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">
-                              Cella frigo di 320 m³ • Capacità 120 pallets
-                            </div>
-                            <div className="csUiTags">
-                              <span>Uva</span>
-                              <span>Cella di conservazione</span>
-                              <span>Conferma immediata</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="csUiCard">
-                          <div className="csUiThumb alt" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Roma • -18°C</b>
-                              <span className="csUiPrice">70 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">
-                              Cella frigo di 500 m³ • Capacità 500 bins
-                            </div>
-                            <div className="csUiTags">
-                              <span>Surgelati</span>
-                              <span>Cancellazione gratuita</span>
-                              <span>Conferma immediata</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="csUiCard">
-                          <div className="csUiThumb" />
-                          <div className="csUiMeta">
-                            <div className="csUiRow">
-                              <b>Siracusa • 3–7°C</b>
-                              <span className="csUiPrice">100 €/gg</span>
-                            </div>
-                            <div className="csUiSmall">
-                              Cella frigo di 500 m³ • Capacità 250 pallets
-                            </div>
-                            <div className="csUiTags">
-                              <span>Arance</span>
-                              <span>Cancellazione gratuita</span>
-                              <span>Richiesta di prenotazione</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="csUiBottom">
-                        <div className="csUiNavItem active">Home</div>
-                        <div className="csUiNavItem">Cerca</div>
-                        <div className="csUiNavItem">Preferiti</div>
-                        <div className="csUiNavItem">Profilo</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* VIDEO COLDSHARING */}
+              <div
+                className="projectRight"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <video
+                  src="/ColdSharing_verticale.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "24px",
+                    boxShadow: "0 20px 60px rgba(0, 0, 0, 0.15)",
+                    objectFit: "cover",
+                  }}
+                  aria-label="Video demo ColdSharing"
+                />
               </div>
-              {/* FINE MOCKUP */}
+              {/* FINE VIDEO */}
             </div>
           </div>
         </section>
